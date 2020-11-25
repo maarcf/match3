@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
     <title>Match ADA</title>
 </head>
+
 <body>
-    <div><p>Hola, soy lau intentando pushear</p></div>
+    <div class="contenedor-general">
+        <h1 class="encabezado">MatchADAs</h1>
+        <div class="controles">
+            <div class="control-puntaje">
+                <p>Combo x1</p>
+                <p>Puntos: <span>0</span></p>
+            </div>
+            <div class="botones-control">
+                <button id="boton-ayuda"><span><i class="fas fa-info-circle"></i></span></button>
+                <button id="boton-reiniciar"><span><i class="fas fa-redo-alt"></i></span></button>
+
+            </div>
+        </div>
+
+        <div class="contenedor-grilla">
+        </div>
+
+        <div class="contador-tiempo">
+            <i class="fas fa-hourglass-half"></i>
+            <p><span>0:00</span></p>
+
+        </div>
+    </div>
 
 
     <script src="main.js"></script>
 </body>
+
 </html>
