@@ -84,7 +84,33 @@ body{
     background: rgb(0 0 0 / 73%);
     border: 2px solid white;
     border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.grilla {
+    width: 98%;
+    height: 98%;
+
+    border-radius: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.grilla > div {
+max-width: 68px;
+max-height: 68px;
+border: none;
+box-sizing: border-box;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
 
 .contador-tiempo{
     width: 80px;
@@ -104,3 +130,4 @@ body{
     align-items: center;
     justify-content: space-between;
 }
+
