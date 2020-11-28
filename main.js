@@ -41,8 +41,12 @@ const tamanioFrutas = (clase) => {
 
 let dificultad = '';
 const dificultadJuego = () => {
+
+// ************************************************************************************************ //
+  // Esto tiene que ser los botones del modal//
   let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
   rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
+// ************************************************************************************************ //
 
   if (rtaUsuarioDificultad === 'facil') {
     dificultad = 9;
@@ -67,3 +71,12 @@ const dificultadJuego = () => {
 
 dificultadJuego();
 
+// REINICIAR JUEGO
+const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
+
+const reiniciarJuego = () => {
+  grillaHTML.innerHTML = ''
+  dificultadJuego();
+}
+
+botonReiniciarJuego.onclick = () => reiniciarJuego()
