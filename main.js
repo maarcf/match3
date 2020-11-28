@@ -2,38 +2,50 @@ const grillaHTML = document.querySelector(".grilla");
 
 const emojisFrutas = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥'];
 
-const obtenerNumeroAlAzar = (items) => {
-  return Math.floor((Math.random() * items.length))  
+const obtenerFrutaAlAzar = (frutas) => {
+  return frutas[Math.floor(Math.random() * frutas.length)]  
 }
 
-const obtenerItemAlAzar = (items) => {
-  return items[obtenerNumeroAlAzar(items)]
-}
 
-// GENERAR GRILLA EN HTML Y EN JS
-let listaDeFrutas = [];
+// GENERAR GRILLA  EN JS
+let grillaDeFrutasJS = [];
 
-const generarGrilla = (filas, columnas, items, tamanio) => {
- 
-  for (let i = 0; i < filas; i++) {
-    listaDeFrutas[i] = [];
-    for (let j = 0; j < columnas; j++) {
-      listaDeFrutas[i][j] = obtenerItemAlAzar(items)
-
-      grillaHTML.innerHTML += `<div class="item" data-x="${i}" data-y="${j}">${listaDeFrutas[i][j]}</div>`
+const generarGrilla = (tamanio) => {
+  grillaDeFrutasJS = [];
+  for (let i = 0; i < tamanio; i++) {
+    grillaDeFrutasJS[i] = [];
+    for (let j = 0; j < tamanio; j++) {
+      grillaDeFrutasJS[i][j] = obtenerFrutaAlAzar(emojisFrutas);
     }    
   }
+  return grillaDeFrutasJS
+}
 
+
+// CREAR GRILLA EN HTML
+const crearGrilla = () => {
+  grillaHTML.innerHTML = ''
+  for (let i = 0; i < grillaDeFrutasJS.length; i++) {
+    for (let j = 0; j < grillaDeFrutasJS[i].length; j++) {
+      grillaHTML.innerHTML += `<div class="item" data-x="${i}" data-y="${j}">${grillaDeFrutasJS[i][j]}</div>`;
+    }
+  }
   return grillaHTML
 }
 
-
-
 // TAMAÑO DE FRUTAS
-const tamanioFrutas = (clase) => {
+const tamanioFrutas = (dificultad) => {
   const frutas = document.querySelectorAll('.item');
   for (let fruta of frutas) {
-    fruta.classList.add(`${clase}`)
+    if (dificultad === 9) {
+      fruta.classList.add('frutas-facil')
+    }
+    else if (dificultad === 8) {
+      fruta.classList.add('frutas-mediana')
+    }
+    else {
+      fruta.classList.add('frutas-dificil')
+    }    
   }
 }
 
@@ -50,18 +62,12 @@ const dificultadJuego = () => {
 
   if (rtaUsuarioDificultad === 'facil') {
     dificultad = 9;
-    generarGrilla(9, 9, emojisFrutas)
-    tamanioFrutas('frutas-facil')
   }
   else if (rtaUsuarioDificultad === 'mediano') {
     dificultad = 8;
-    generarGrilla(8, 8, emojisFrutas)
-    tamanioFrutas('frutas-mediana')
   }
   else if (rtaUsuarioDificultad === 'dificil') {
     dificultad = 7;
-    generarGrilla(7, 7, emojisFrutas)
-    tamanioFrutas('frutas-dificil')
   }
   else {
     dificultad = ''
@@ -80,3 +86,32 @@ const reiniciarJuego = () => {
 }
 
 botonReiniciarJuego.onclick = () => reiniciarJuego()
+
+
+// BUSCAR BLOQUES INCIALES
+const hayBloquesIguales = () => {
+  for (let i = 0; i < grillaDeFrutasJS.length; i++) {      
+    for (let j = 0; j < grillaDeFrutasJS[i].length; j++) {       
+      if (grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i][j + 1] && 
+        grillaDeFrutasJS[i][j + 1] === grillaDeFrutasJS[i][j + 2]) {
+       return true
+      }    
+      if (grillaDeFrutasJS[i + 1] && grillaDeFrutasJS[i + 2] && 
+        grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i + 1][j] && 
+        grillaDeFrutasJS[i + 1][j] === grillaDeFrutasJS[i + 2][j]) {
+        return true
+      }           
+    }      
+  }
+  return false
+}
+
+
+// HACER GRILLA en HTML Y JS
+do {
+  grillaDeFrutasJS = generarGrilla(dificultad)  
+} 
+while(hayBloquesIguales() === true)
+
+crearGrilla()
+tamanioFrutas(dificultad)
