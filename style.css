@@ -121,3 +121,12 @@ body {
     justify-content: space-between;
 }
 
+.frutas-dificil {
+  font-size: 40px;
+}
+.frutas-mediana {
+  font-size: 35px;
+}
+.frutas-facil {
+  font-size: 30px;
+}

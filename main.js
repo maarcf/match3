@@ -1,6 +1,5 @@
 const grillaHTML = document.querySelector(".grilla");
 
-
 const emojisFrutas = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥'];
 
 const obtenerNumeroAlAzar = (items) => {
@@ -11,7 +10,7 @@ const obtenerItemAlAzar = (items) => {
   return items[obtenerNumeroAlAzar(items)]
 }
 
-
+// GENERAR GRILLA EN HTML Y EN JS
 let listaDeFrutas = [];
 
 const generarGrilla = (filas, columnas, items, tamanio) => {
@@ -21,7 +20,7 @@ const generarGrilla = (filas, columnas, items, tamanio) => {
     for (let j = 0; j < columnas; j++) {
       listaDeFrutas[i][j] = obtenerItemAlAzar(items)
 
-      grillaHTML.innerHTML += `<div class="item" font-size= "${tamanio}px" data-x="${i}" data-y="${j}">${listaDeFrutas[i][j]}</div>`
+      grillaHTML.innerHTML += `<div class="item" data-x="${i}" data-y="${j}">${listaDeFrutas[i][j]}</div>`
     }    
   }
 
@@ -30,28 +29,35 @@ const generarGrilla = (filas, columnas, items, tamanio) => {
 
 
 
-
+// TAMAÑO DE FRUTAS
+const tamanioFrutas = (clase) => {
+  const frutas = document.querySelectorAll('.item');
+  for (let fruta of frutas) {
+    fruta.classList.add(`${clase}`)
+  }
+}
 
 // DIFICULTAD DE JUEGO
 
-
 let dificultad = '';
 const dificultadJuego = () => {
-
   let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
   rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
 
   if (rtaUsuarioDificultad === 'facil') {
     dificultad = 9;
-    return generarGrilla(9, 9, emojisFrutas)
+    generarGrilla(9, 9, emojisFrutas)
+    tamanioFrutas('frutas-facil')
   }
   else if (rtaUsuarioDificultad === 'mediano') {
     dificultad = 8;
-    return generarGrilla(8, 8, emojisFrutas)
+    generarGrilla(8, 8, emojisFrutas)
+    tamanioFrutas('frutas-mediana')
   }
   else if (rtaUsuarioDificultad === 'dificil') {
     dificultad = 7;
-    generarGrilla(7, 7, emojisFrutas, 40)
+    generarGrilla(7, 7, emojisFrutas)
+    tamanioFrutas('frutas-dificil')
   }
   else {
     dificultad = ''
@@ -59,5 +65,5 @@ const dificultadJuego = () => {
   }
 }
 
-dificultadJuego()
+dificultadJuego();
 
