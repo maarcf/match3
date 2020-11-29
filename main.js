@@ -6,7 +6,7 @@ const obtenerFrutaAlAzar = (frutas) => {
   return frutas[Math.floor(Math.random() * frutas.length)]  
 }
 
-// para commit de prueba
+// para commit de prueba2
 // GENERAR GRILLA  EN JS
 let grillaDeFrutasJS = [];
 
