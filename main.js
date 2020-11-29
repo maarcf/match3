@@ -6,10 +6,10 @@
 
 const grillaHTML = document.querySelector(".grilla");
 
-const emojisFrutas = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥'];
+const frutas = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥'];
 
 
-let columnas = 0 
+let columnas = 9 
 let anchoDeDiv = 0
 const anchoDeGrilla = 500
 let dificultad = ""
@@ -31,24 +31,7 @@ const obtenerItemAlAzar = (array) => {
  *               CREAR GRILLA 
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
-const definirCantidadDeColumnas = () => {
- 
-  switch (dificultad) {
-    case "1":  
-        columnas = 10
-       break;
-    case "2":
-        columnas = 8 
-      break;
-    case "3":
-        columnas = 6  
-      break;
-    default:
-      alert("Ingrese una opción válida")
-      iniciarJuego()
-      break;
-  }
-}
+
 const dibujarAnchoDeGrilla = () => { 
   grillaHTML.style.width = `${anchoDeGrilla}px`
   }
@@ -76,10 +59,25 @@ const dibujarGrillaHTML = () => {
     }
   }
 
+  const generarCuadrado = (x, y) => {
+ 
+    const cuadrado = document.createElement('div')
+    cuadrado.dataset.x = y
+    cuadrado.dataset.y = x
+  
+    cuadrado.innerHTML = grillaJS[y][x]
+  
+    cuadrado.style.top = `${y * anchoDeDiv}px`
+    cuadrado.style.left = `${x * anchoDeDiv}px`
+    cuadrado.style.width = `${anchoDeDiv}px`
+    cuadrado.style.height = `${anchoDeDiv}px`
+  
+    return cuadrado
+  }
+  
 
 const crearGrilla = (items) => {
-  
-  definirCantidadDeColumnas()   
+
   dibujarAnchoDeGrilla()
   redimensionarAnchoDeDiv()
   creargrillaJS(columnas, items)
@@ -112,50 +110,6 @@ while(hayBloquesIguales() === true)
 */
 
 
-// para commit de prueba2
-// GENERAR GRILLA  EN JS
-let grillaDeFrutasJS = [];
-
-const generarGrilla = (tamanio) => {
-  grillaDeFrutasJS = [];
-  for (let i = 0; i < tamanio; i++) {
-    grillaDeFrutasJS[i] = [];
-    for (let j = 0; j < tamanio; j++) {
-      grillaDeFrutasJS[i][j] = obtenerFrutaAlAzar(emojisFrutas);
-    }    
-  }
-  return grillaDeFrutasJS
-}
-
-
-// CREAR GRILLA EN HTML
-const crearGrilla = () => {
-  grillaHTML.innerHTML = ''
-  for (let i = 0; i < grillaDeFrutasJS.length; i++) {
-    for (let j = 0; j < grillaDeFrutasJS[i].length; j++) {
-      grillaHTML.innerHTML += `<div class="item" data-x="${i}" data-y="${j}">${grillaDeFrutasJS[i][j]}</div>`;
-    }
-  }
-  return grillaHTML
-}
-
-// TAMAÑO DE FRUTAS
-const tamanioFrutas = (dificultad) => {
-  const frutas = document.querySelectorAll('.item');
-  for (let fruta of frutas) {
-    if (dificultad === 9) {
-      fruta.classList.add('frutas-facil')
-    }
-    else if (dificultad === 8) {
-      fruta.classList.add('frutas-mediana')
-    }
-    else {
-      fruta.classList.add('frutas-dificil')
-    }    
-  }
-}
-
-
 const elegirDificultad = () => {
 
 // ************************************************************************************************ //
@@ -165,16 +119,15 @@ const elegirDificultad = () => {
 // ************************************************************************************************ //
 
   if (rtaUsuarioDificultad === 'facil') {
-    dificultad = 9;
+    columnas = 9;
   }
   else if (rtaUsuarioDificultad === 'mediano') {
-    dificultad = 8;
+    columnas = 8;
   }
   else if (rtaUsuarioDificultad === 'dificil') {
-    dificultad = 7;
+    columnas = 7;
   }
   else {
-    dificultad = ''
     return alert('formato NO valido')
   }
 }
@@ -217,9 +170,12 @@ const hayBloquesIguales = () => {
  *                MODALES
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
+const darBienvenida = () => {
+  console.log("aca se puede meter el codigo del modal de bienvenida")
+}
 
 const iniciarModales = () => {
-  darBienvenida()
+  darBienvenida() 
   elegirDificultad()
 }
 
