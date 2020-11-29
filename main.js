@@ -8,23 +8,84 @@ const grillaHTML = document.querySelector(".grilla");
 
 const emojisFrutas = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥'];
 
-let dificultad = ""
 
-const obtenerFrutaAlAzar = (frutas) => {
-  return frutas[Math.floor(Math.random() * frutas.length)]  
+let columnas = 0 
+let anchoDeDiv = 0
+const anchoDeGrilla = 500
+let dificultad = ""
+let grillaJS = [];  
+
+
+
+const obtenerNumeroAlAzar = (array) => {
+  return Math.floor((Math.random() * array.length))
 }
 
-/**
- * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
- *                MODALES
- * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
- */
+const obtenerItemAlAzar = (array) => {
+  return array[obtenerNumeroAlAzar(array)]
+}
+
 
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *               CREAR GRILLA 
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
+const definirCantidadDeColumnas = () => {
+ 
+  switch (dificultad) {
+    case "1":  
+        columnas = 10
+       break;
+    case "2":
+        columnas = 8 
+      break;
+    case "3":
+        columnas = 6  
+      break;
+    default:
+      alert("Ingrese una opción válida")
+      iniciarJuego()
+      break;
+  }
+}
+const dibujarAnchoDeGrilla = () => { 
+  grillaHTML.style.width = `${anchoDeGrilla}px`
+  }
+
+const redimensionarAnchoDeDiv = () => {
+    anchoDeDiv = anchoDeGrilla / columnas
+  }
+
+const creargrillaJS = (columnas, array) => {
+    for (let i = 0; i < columnas; i++) {
+      grillaJS[i] = []
+      for (let j = 0; j < columnas; j++) {
+        grillaJS[i][j] = obtenerItemAlAzar(array)
+      }
+    }
+  }
+
+const dibujarGrillaHTML = () => {
+    for (let i = 0; i < grillaJS.length; i++) {
+      for (let j = 0; j < grillaJS[i].length; j++) {
+        const cuadrado = generarCuadrado(j, i)
+          grillaHTML.appendChild(cuadrado)
+        
+      }
+    }
+  }
+
+
+const crearGrilla = (items) => {
+  
+  definirCantidadDeColumnas()   
+  dibujarAnchoDeGrilla()
+  redimensionarAnchoDeDiv()
+  creargrillaJS(columnas, items)
+  dibujarGrillaHTML() 
+
+}
 
  /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
@@ -39,7 +100,16 @@ const obtenerFrutaAlAzar = (frutas) => {
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
 
+/*
+const iniciarSinMatches = () => {
+  do {
+  grillaDeFrutasJS = generarGrilla(dificultad)  
+} 
+while(hayBloquesIguales() === true)
 
+}
+
+*/
 
 
 // para commit de prueba2
@@ -85,10 +155,8 @@ const tamanioFrutas = (dificultad) => {
   }
 }
 
-// DIFICULTAD DE JUEGO
 
-let dificultad = '';
-const dificultadJuego = () => {
+const elegirDificultad = () => {
 
 // ************************************************************************************************ //
   // Esto tiene que ser los botones del modal//
@@ -111,7 +179,6 @@ const dificultadJuego = () => {
   }
 }
 
-dificultadJuego();
 
 // REINICIAR JUEGO
 const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
@@ -143,20 +210,21 @@ const hayBloquesIguales = () => {
 }
 
 
-// HACER GRILLA en HTML Y JS
-do {
-  grillaDeFrutasJS = generarGrilla(dificultad)  
-} 
-while(hayBloquesIguales() === true)
 
-crearGrilla()
-tamanioFrutas(dificultad)
 
+/**
+ * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
+ *                MODALES
+ * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
+ */
 
 const iniciarModales = () => {
   darBienvenida()
-  dificultad = elegirDificultad()
+  elegirDificultad()
 }
+
+
+
 
 
 /**
@@ -167,7 +235,7 @@ const iniciarModales = () => {
 
 const iniciarJuego = () => {
   iniciarModales()
-  crearGrilla(dificultad, frutas) 
+  crearGrilla(frutas) 
 }
  
 window.onload = () => {
