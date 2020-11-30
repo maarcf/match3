@@ -161,7 +161,7 @@ align-items: center;
     font-family: Montserrat;
     text-align: center;
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 400;
     
     
     display: flex;
@@ -170,14 +170,18 @@ align-items: center;
     justify-content: center;
 }
 
+
 .modal-botones{
+    width: 250px;
     display: flex;
-    justify-content: right;
+    justify-content: center;
+    align-items: center;
 }
 
 .botones{
 padding: 15px;
 margin-top: 20px;
+margin-right: 10px;
 color: white;
 background-color: #d81b60 ;
 border-radius: 10px;
