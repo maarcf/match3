@@ -138,6 +138,22 @@
  }
 
 
+ const seleccionarItem = (e) => {
+     let primerCuadrado = document.querySelector(".seleccionado")
+
+     if (primerCuadrado != null) {
+         if (sonAdyacentes(primerCuadrado, e.target)) {
+             intercambiarCuadrados(primerCuadrado, e.target)
+         } else {
+             primerCuadrado.classList.remove("seleccionado")
+             e.target.classList.add("seleccionado")
+         }
+     } else(
+         e.target.classList.add("seleccionado")
+     )
+ }
+
+
 
  /**
   * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
