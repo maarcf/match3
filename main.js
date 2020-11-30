@@ -68,10 +68,13 @@
  const generarCuadrado = (x, y) => {
 
      const cuadrado = document.createElement('div')
+     cuadrado.classList.add("item")
      cuadrado.dataset.x = y
      cuadrado.dataset.y = x
 
      cuadrado.innerHTML = grillaJS[y][x]
+
+     cuadrado.addEventListener('click', seleccionarItem)
 
      cuadrado.style.top = `${y * anchoDeDiv}px`
      cuadrado.style.left = `${x * anchoDeDiv}px`
