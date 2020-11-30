@@ -90,6 +90,7 @@ body {
   
 .grilla > div {
   border: none;
+  font-size: 25px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;

@@ -26,6 +26,12 @@ const obtenerItemAlAzar = (array) => {
 }
 
 
+const borrarGrilla = () => {
+  grillaHTML.innerHTML = ""
+  grillaJS = [];
+  
+}
+
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *               CREAR GRILLA 
@@ -133,19 +139,9 @@ const elegirDificultad = () => {
 }
 
 
-// REINICIAR JUEGO
-const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
-
-const reiniciarJuego = () => {
-  grillaHTML.innerHTML = ''
-  dificultadJuego();
-}
-
-botonReiniciarJuego.onclick = () => reiniciarJuego()
-
 
 // BUSCAR BLOQUES INCIALES
-const hayBloquesIguales = () => {
+const hayMatch = () => {
   for (let i = 0; i < grillaDeFrutasJS.length; i++) {      
     for (let j = 0; j < grillaDeFrutasJS[i].length; j++) {       
       if (grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i][j + 1] && 
@@ -188,6 +184,18 @@ const iniciarModales = () => {
  *        INICIALIZAR JUEGO
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
+
+// REINICIAR JUEGO
+const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
+
+const reiniciarJuego = () => {
+  borrarGrilla()
+  elegirDificultad()
+  crearGrilla(frutas) 
+}
+
+botonReiniciarJuego.onclick = () => reiniciarJuego()
+
 
 const iniciarJuego = () => {
   iniciarModales()
