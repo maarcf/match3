@@ -98,22 +98,101 @@ const crearGrilla = (items) => {
  */
 
 
+
+
+
+ 
+
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *              BUSCAR MATCHES
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
+const hayMatch = () => {
+  for (let i = 0; i < grillaDeFrutasJS.length; i++) {      
+    for (let j = 0; j < grillaDeFrutasJS[i].length; j++) {       
+      if (grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i][j + 1] && 
+        grillaDeFrutasJS[i][j + 1] === grillaDeFrutasJS[i][j + 2]) {
+       return true
+      }    
+      if (grillaDeFrutasJS[i + 1] && grillaDeFrutasJS[i + 2] && 
+        grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i + 1][j] && 
+        grillaDeFrutasJS[i + 1][j] === grillaDeFrutasJS[i + 2][j]) {
+        return true
+      }           
+    }      
+  }
+  return false
+}
 
-/*
-const iniciarSinMatches = () => {
+
+
+const buscarMatchesHorizontales = () => {
+  for (let i = 0; i < grillaJS.length; i++) {
+    for (let j = 0; j < grillaJS[i].length; j++) {
+ 
+      if(grillaJS[i][j+1]) {
+        if(grillaJS[i][j+2]){
+          const div1 = document.querySelector(`div[data-x = '${i}'][data-y = '${j}']`)
+          const div2 = document.querySelector(`div[data-x = '${i}'][data-y = '${j + 1}']`)
+          const div3 = document.querySelector(`div[data-x = '${i}'][data-y = '${j + 2}']`)
+            
+          const match3 = [ div1, div2, div3]
+           
+          for(let div of match3) {
+            if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
+                  marcarMatches(match3)
+                }  
+          }
+        }
+      }
+    }
+  }
+}
+
+const buscarMatchesVerticales = () => {
+  for (let i = 0; i < grillaJS.length; i++) {
+   
+    for (let j = 0; j < grillaJS[i].length; j++) {
+    // VERTICALES -match de 3 elementos
+    // Buscar solo si hay mas elementos abajo
+    console.log(`estoy en la posicion: i = ${i} y j =  ${j}`)
+   
+      if(grillaJS[i+1]) {
+        if(grillaJS[i+2]){
+          const div1 = document.querySelector(`div[data-x = '${i}'][data-y = '${j}']`)
+          const div2 = document.querySelector(`div[data-x = '${i + 1}'][data-y = '${j}']`)
+          const div3 = document.querySelector(`div[data-x = '${i + 2}'][data-y = '${j}']`)
+          
+          const match3 = [div1, div2, div3]
+          
+          for(let div of match3) {
+            if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
+              marcarMatches(match3)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+const buscarMatches = () =>{
+   buscarMatchesHorizontales()
+   buscarMatchesVerticales()
+ }
+
+
+const crearGrillaSinMatches = (frutas) => {
   do {
-  grillaDeFrutasJS = generarGrilla(dificultad)  
+       crearGrilla(frutas)
 } 
-while(hayBloquesIguales() === true)
+while(hayMatch() === true)
 
 }
 
-*/
+
 
 
 const elegirDificultad = () => {
@@ -137,27 +216,6 @@ const elegirDificultad = () => {
     return alert('formato NO valido')
   }
 }
-
-
-
-// BUSCAR BLOQUES INCIALES
-const hayMatch = () => {
-  for (let i = 0; i < grillaDeFrutasJS.length; i++) {      
-    for (let j = 0; j < grillaDeFrutasJS[i].length; j++) {       
-      if (grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i][j + 1] && 
-        grillaDeFrutasJS[i][j + 1] === grillaDeFrutasJS[i][j + 2]) {
-       return true
-      }    
-      if (grillaDeFrutasJS[i + 1] && grillaDeFrutasJS[i + 2] && 
-        grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i + 1][j] && 
-        grillaDeFrutasJS[i + 1][j] === grillaDeFrutasJS[i + 2][j]) {
-        return true
-      }           
-    }      
-  }
-  return false
-}
-
 
 
 
@@ -191,7 +249,7 @@ const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
 const reiniciarJuego = () => {
   borrarGrilla()
   elegirDificultad()
-  crearGrilla(frutas) 
+  crearGrillaSinMatches(frutas) 
 }
 
 botonReiniciarJuego.onclick = () => reiniciarJuego()
@@ -199,7 +257,7 @@ botonReiniciarJuego.onclick = () => reiniciarJuego()
 
 const iniciarJuego = () => {
   iniciarModales()
-  crearGrilla(frutas) 
+  crearGrillaSinMatches(frutas) 
 }
  
 window.onload = () => {
