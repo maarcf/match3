@@ -70,8 +70,8 @@ body {
 }
 
 .contenedor-grilla{
-    width: 500px;
-    height: 500px;
+    width: 510px;
+    height: 510px;
     margin-bottom: 10px;
     background: rgb(0 0 0 / 73%);
     border: 2px solid white;
@@ -90,11 +90,9 @@ body {
   
 .grilla > div {
   border: none;
-  font-size: 25px;
+  font-size: 32px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 5px;
   position: absolute;
   transition: 2s;
 
