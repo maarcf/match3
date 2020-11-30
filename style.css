@@ -72,6 +72,7 @@ body{
 .botones-control>button{
     background-color:#d81b60 ;
     border: none;
+    padding: 5px;
     font-size: 20px;
     color: white;
     text-shadow: 1px 1px black, 1px -1px black, -1px -1px black, -1px 1px black;
@@ -151,19 +152,18 @@ align-items: center;
 
 .modal{
 
-    width: 400px;
+    width: 500px;
     background-color: #fafafa;
     border-radius: 10px;
     padding: 20px;
     position: absolute;
     z-index: 6;
 
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     text-align: center;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
-    
-    
+        
     display: flex;
     flex-direction: column;
     align-items: center;
