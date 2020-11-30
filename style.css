@@ -84,13 +84,19 @@ body {
     position: relative;
 }
 
-.grilla>div {
+.item {
     border: none;
     font-size: 32px;
     box-sizing: border-box;
     padding: 5px;
     position: absolute;
-    transition: 2s;
+    transition: 0.5s;
+    cursor: pointer;
+    transform: scale(1);
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contador-tiempo {
