@@ -7,15 +7,18 @@ body {
     justify-content: center;
     background-image: url(imagenes/fondo.svg);
     background-size: cover;
+  
 }
 
 .contenedor-general {
-    width: 520px;
-    max-width: 520px;
+    width: 500px;
+    max-width: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    margin-top: 30px;
 }
 
 .encabezado {
@@ -26,7 +29,7 @@ body {
 }
 
 .controles {
-    width: 500px;
+    width: 480px;
     height: 40px;
     padding: 5px;
     margin-bottom: 10px;
@@ -66,8 +69,8 @@ body {
 }
 
 .contenedor-grilla {
-    width: 510px;
-    height: 510px;
+    width: 480px;
+    height: 480px;
     margin-bottom: 10px;
     background: rgb(0 0 0 / 73%);
     border: 2px solid white;
@@ -82,6 +85,7 @@ body {
     height: 98%;
     border-radius: 10px;
     position: relative;
+    padding: 10px;
 }
 
 .grilla>div {
@@ -112,14 +116,20 @@ body {
 
 .frutas-dificil {
     font-size: 40px;
+    text-align: center;
+    align-items: center;
 }
 
 .frutas-mediana {
     font-size: 35px;
+    text-align: center;
+    align-items: center;
 }
 
 .frutas-facil {
     font-size: 30px;
+    text-align: center;
+    align-items: center;
 }
 
 .seleccionado {

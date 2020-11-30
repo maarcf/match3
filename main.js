@@ -11,7 +11,7 @@ const frutas = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥'];
 
 let columnas = 9 
 let anchoDeDiv = 0
-const anchoDeGrilla = 500
+const anchoDeGrilla = 480
 let dificultad = ""
 let grillaJS = [];  
 
