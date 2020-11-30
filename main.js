@@ -101,7 +101,7 @@ const crearGrilla = (items) => {
 
 
 
- 
+
 
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
@@ -109,15 +109,15 @@ const crearGrilla = (items) => {
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
 const hayMatch = () => {
-  for (let i = 0; i < grillaDeFrutasJS.length; i++) {      
-    for (let j = 0; j < grillaDeFrutasJS[i].length; j++) {       
-      if (grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i][j + 1] && 
-        grillaDeFrutasJS[i][j + 1] === grillaDeFrutasJS[i][j + 2]) {
+  for (let i = 0; i < grillaJS.length; i++) {      
+    for (let j = 0; j < grillaJS[i].length; j++) {       
+      if (grillaJS[i][j] === grillaJS[i][j + 1] && 
+        grillaJS[i][j + 1] === grillaJS[i][j + 2]) {
        return true
       }    
-      if (grillaDeFrutasJS[i + 1] && grillaDeFrutasJS[i + 2] && 
-        grillaDeFrutasJS[i][j] === grillaDeFrutasJS[i + 1][j] && 
-        grillaDeFrutasJS[i + 1][j] === grillaDeFrutasJS[i + 2][j]) {
+      if (grillaJS[i + 1] && grillaJS[i + 2] && 
+        grillaJS[i][j] === grillaJS[i + 1][j] && 
+        grillaJS[i + 1][j] === grillaJS[i + 2][j]) {
         return true
       }           
     }      
@@ -185,7 +185,10 @@ const buscarMatches = () =>{
 
 
 const crearGrillaSinMatches = (frutas) => {
+  
+
   do {
+       borrarGrilla()
        crearGrilla(frutas)
 } 
 while(hayMatch() === true)
