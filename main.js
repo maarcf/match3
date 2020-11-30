@@ -123,6 +123,19 @@
  }
 
 
+ const sonAdyacentes = (elem1, elem2) => {
+     const datax1 = Number(elem1.dataset.x)
+     const datax2 = Number(elem2.dataset.x)
+     const datay1 = Number(elem1.dataset.y)
+     const datay2 = Number(elem2.dataset.y)
+
+     if ((datax1 === datax2 && datay1 === datay2 + 1) || (datax1 === datax2 && datay1 === datay2 - 1) ||
+         (datay1 === datay2 && datax1 === datax2 + 1) || (datay1 === datay2 && datax1 === datax2 - 1)) {
+         return true
+     } else {
+         return false
+     }
+ }
 
 
 
