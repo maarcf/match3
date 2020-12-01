@@ -32,6 +32,7 @@
 
  }
 
+
  /**
   * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
   *               CREAR GRILLA 
@@ -75,7 +76,7 @@
      cuadrado.innerHTML = grillaJS[y][x]
 
      cuadrado.addEventListener('click', seleccionarItem)
-
+     
      cuadrado.style.top = `${y * anchoDeDiv}px`
      cuadrado.style.left = `${x * anchoDeDiv}px`
      cuadrado.style.width = `${anchoDeDiv}px`
@@ -124,6 +125,8 @@
          elem1.dataset.x = datax2
          elem2.dataset.x = datax1
      }
+
+     buscarMatches()
  }
 
 
@@ -146,7 +149,7 @@
      let primerCuadrado = document.querySelector(".seleccionado")
 
      if (primerCuadrado != null) {
-         if (sonAdyacentes(primerCuadrado, e.target)) {
+         if (sonAdyacentes(primerCuadrado, e.target) ) {
              intercambiarCuadrados(primerCuadrado, e.target)
          } else {
              primerCuadrado.classList.remove("seleccionado")
@@ -161,9 +164,17 @@
 
  /**
   * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
-  *              BUSCAR MATCHES
+  *              BUSCAR y BORRAR MATCHES
   * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
   */
+
+
+  const borrarMatches = (matches) => {  
+    for(let div of matches){
+          div.innerHTML = ""
+        }
+  }
+
  const hayMatch = () => {
      for (let i = 0; i < grillaJS.length; i++) {
          for (let j = 0; j < grillaJS[i].length; j++) {
@@ -197,7 +208,7 @@
 
                      for (let div of match3) {
                          if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                             marcarMatches(match3)
+                             borrarMatches(match3)
                          }
                      }
                  }
@@ -224,7 +235,7 @@
 
                      for (let div of match3) {
                          if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                             marcarMatches(match3)
+                             borrarMatches(match3)
                          }
                      }
                  }
@@ -241,7 +252,6 @@
 
 
  const crearGrillaSinMatches = (frutas) => {
-
 
      do {
          borrarGrilla()
