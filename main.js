@@ -47,7 +47,7 @@ nuevoJuegoReiniciar.onclick=()=>{
 
  let columnas = 9
  let anchoDeDiv = 0
- const anchoDeGrilla = 500
+ const anchoDeGrilla = 480
  let dificultad = ""
  let grillaJS = [];
 
@@ -290,24 +290,24 @@ nuevoJuegoReiniciar.onclick=()=>{
 
 
 
-//  const elegirDificultad = () => {
+ const elegirDificultad = () => {
 
-//      // ************************************************************************************************ //
-//      // Esto tiene que ser los botones del modal//
-//      let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
-//      rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
-//      // ************************************************************************************************ //
+     // ************************************************************************************************ //
+     // Esto tiene que ser los botones del modal//
+     let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
+     rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
+     // ************************************************************************************************ //
 
-//      if (rtaUsuarioDificultad === 'facil') {
-//          columnas = 9;
-//      } else if (rtaUsuarioDificultad === 'mediano') {
-//          columnas = 8;
-//      } else if (rtaUsuarioDificultad === 'dificil') {
-//          columnas = 7;
-//      } else {
-//          return alert('formato NO valido')
-//      }
-//  }
+     if (rtaUsuarioDificultad === 'facil') {
+         columnas = 9;
+     } else if (rtaUsuarioDificultad === 'mediano') {
+         columnas = 8;
+     } else if (rtaUsuarioDificultad === 'dificil') {
+         columnas = 7;
+     } else {
+         return alert('formato NO valido')
+     }
+ }
 
 
 
@@ -316,42 +316,42 @@ nuevoJuegoReiniciar.onclick=()=>{
   *                MODALES
   * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
   */
-//  const darBienvenida = () => {
-//      console.log("aca se puede meter el codigo del modal de bienvenida")
-//  }
+ const darBienvenida = () => {
+     console.log("aca se puede meter el codigo del modal de bienvenida")
+ }
 
-//  const iniciarModales = () => {
-//      darBienvenida()
-//      elegirDificultad()
-//  }
-
-
+ const iniciarModales = () => {
+     darBienvenida()
+     elegirDificultad()
+ }
 
 
 
-//  /**
-//   * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
-//   *        INICIALIZAR JUEGO
-//   * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
-//   */
-
-//  // REINICIAR JUEGO
-//  const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
-
-//  const reiniciarJuego = () => {
-//      borrarGrilla()
-//      elegirDificultad()
-//      crearGrillaSinMatches(frutas)
-//  }
-
-//  botonReiniciarJuego.onclick = () => reiniciarJuego()
 
 
-//  const iniciarJuego = () => {
-//      iniciarModales()
-//      crearGrillaSinMatches(frutas)
-//  }
+ /**
+  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
+  *        INICIALIZAR JUEGO
+  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
+  */
 
-//  window.onload = () => {
-//      iniciarJuego()
-//  }
+ // REINICIAR JUEGO
+ const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
+
+ const reiniciarJuego = () => {
+     borrarGrilla()
+     elegirDificultad()
+     crearGrillaSinMatches(frutas)
+ }
+
+ botonReiniciarJuego.onclick = () => reiniciarJuego()
+
+
+ const iniciarJuego = () => {
+     iniciarModales()
+     crearGrillaSinMatches(frutas)
+ }
+
+ window.onload = () => {
+     iniciarJuego()
+ }

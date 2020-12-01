@@ -90,6 +90,8 @@ body {
 }
 
 .item {
+    width: 68px;
+    max-width: 68px;
     border: none;
     font-size: 32px;
     box-sizing: border-box;
