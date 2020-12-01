@@ -7,12 +7,12 @@ const botonReiniciar = document.getElementById('boton-reiniciar');
 const botonAJugar = document.getElementById('inicio-juego');
 const cancelarReiniciar = document.getElementById('cancelar');
 const nuevoJuegoReiniciar = document.getElementById('nuevo-juego-reiniciar');
+const dificultadFacil = document.getElementById('facil');
+const dificultadMediano = document.getElementById('mediano');
+const dificultadDificil = document.getElementById('dificil');
 
-botonAJugar.onclick = () => {
-    modalBienvenida.classList.add('hidden');
-    modalDificultad.classList.remove('hidden');
 
-}
+
 
 botonAyuda.onclick = () => {
     modalBienvenida.classList.remove('hidden');
@@ -47,7 +47,7 @@ const frutas = ['🍉', '🥝', '🍌', '🍇', '🍋', '🥥'];
 
 let columnas = 9;
 let anchoDeDiv = 0;
-const anchoDeGrilla = 480;
+const anchoDeGrilla = 440;
 let dificultad = ""
 let grillaJS = [];
 
@@ -302,21 +302,37 @@ const crearGrillaSinMatches = (frutas) => {
 
 const elegirDificultad = () => {
 
-    // ************************************************************************************************ //
-    // Esto tiene que ser los botones del modal//
-    let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
-    rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
-    // ************************************************************************************************ //
+    modalDificultad.classList.remove('hidden');
 
-    if (rtaUsuarioDificultad === 'facil') {
+    dificultadFacil.onclick=()=>{
+        modalDificultad.classList.add('hidden');
         columnas = 9;
-    } else if (rtaUsuarioDificultad === 'mediano') {
-        columnas = 8;
-    } else if (rtaUsuarioDificultad === 'dificil') {
-        columnas = 7;
-    } else {
-        return alert('formato NO valido')
     }
+
+    dificultadMediano.onclick=()=>{
+        modalDificultad.classList.add('hidden');
+        columnas = 8;
+    }
+
+    dificultadDificil.onclick=()=>{
+        modalDificultad.classList.add('hidden');
+        columnas = 7;
+    }
+    // // ************************************************************************************************ //
+    // // Esto tiene que ser los botones del modal//
+    // let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
+    // rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
+    // // ************************************************************************************************ //
+
+    // if (rtaUsuarioDificultad === 'facil') {
+    //     columnas = 9;
+    // } else if (rtaUsuarioDificultad === 'mediano') {
+    //     columnas = 8;
+    // } else if (rtaUsuarioDificultad === 'dificil') {
+    //     columnas = 7;
+    // } else {
+    //     return alert('formato NO valido')
+    // }
 }
 
 
@@ -327,12 +343,18 @@ const elegirDificultad = () => {
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
 const darBienvenida = () => {
-    console.log("aca se puede meter el codigo del modal de bienvenida")
+   
+    modalBienvenida.classList.remove('hidden')
+
+    botonAJugar.onclick = () => {
+        modalBienvenida.classList.add('hidden');
+        elegirDificultad()
+    }
 }
 
 const iniciarModales = () => {
     darBienvenida()
-    elegirDificultad()
+    
 }
 
 
