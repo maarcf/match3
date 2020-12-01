@@ -8,6 +8,7 @@ body {
     background-image: url(imagenes/fondo.svg);
     background-size: cover;
   
+    margin:0;
 }
 
 .contenedor-general {
@@ -89,6 +90,8 @@ body {
 }
 
 .item {
+    width: 68px;
+    max-width: 68px;
     border: none;
     font-size: 32px;
     box-sizing: border-box;
@@ -141,4 +144,63 @@ body {
 .seleccionado {
     border: 1px solid #ffffff;
 }
+
+
+/* MODALES -----------------------------------------------------------------------------------------------------------------------------------*/
+.overlay{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 4;
+}
+
+.modal{
+    width: 500px;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    position: absolute;
+    z-index: 6;
+    font-family: Montserrat;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 300;
+    font-weight: 400;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.modal-botones{
+    width: 250px;
+    display: flex;
+    justify-content: right;
+    justify-content: center;
+    align-items: center;
+}
+
+.botones{
+padding: 15px;
+margin-top: 20px;
+margin-right: 10px;
+color: white;
+background-color: #d81b60 ;
+border-radius: 10px;
+border: 2px solid white;
+}
+.hidden{
+    display: none;
+}
+
+
+
 
