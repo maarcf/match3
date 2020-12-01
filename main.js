@@ -8,25 +8,25 @@ const botonAJugar = document.getElementById('inicio-juego');
 const cancelarReiniciar = document.getElementById('cancelar');
 const nuevoJuegoReiniciar = document.getElementById('nuevo-juego-reiniciar');
 
-botonAJugar.onclick=()=>{
+botonAJugar.onclick = () => {
     modalBienvenida.classList.add('hidden');
     modalDificultad.classList.remove('hidden');
     
 }
 
-botonAyuda.onclick=()=>{
+botonAyuda.onclick = () => {
     modalBienvenida.classList.remove('hidden');
 }
 
-botonReiniciar.onclick=()=>{
+botonReiniciar.onclick = () => {
     modalReiniciarJuego.classList.remove('hidden');
 }
 
-cancelarReiniciar.onclick=()=>{
+cancelarReiniciar.onclick = () => {
     modalReiniciarJuego.classList.add('hidden');
 }
 
-nuevoJuegoReiniciar.onclick=()=>{
+nuevoJuegoReiniciar.onclick = () => {
     modalReiniciarJuego.classList.add('hidden');
     modalDificultad.classList.remove('hidden');
 } 
@@ -47,7 +47,7 @@ nuevoJuegoReiniciar.onclick=()=>{
 
  let columnas = 9
  let anchoDeDiv = 0
- const anchoDeGrilla = 480
+ const anchoDeGrilla = 440
  let dificultad = ""
  let grillaJS = [];
 
