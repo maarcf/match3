@@ -206,6 +206,44 @@ const hayMatch = () => {
     return false
 }
 
+const hayCuadradosVacios = () => {
+    for(let cuadrado of cuadradosDeGrillaHTML){
+        if(cuadrado.innerHTML === ""){
+           return true 
+        } 
+}
+
+const reacomodarFrutas = (matches) => {
+    
+   do {
+    const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+
+    for(let cuadrado of cuadradosDeGrillaHTML){
+    
+    let dataX = cuadrado.dataset.x
+    let dataY = cuadrado.dataset.y
+
+    const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
+           
+
+        if(cuadrado.innerHTML === ""){
+            
+            if(dataX != 0){ // en fila superior generar fruta
+                intercambiarCuadrados(cuadrado, cuadradoSuperior)
+            }else {
+                cuadrado = obtenerItemAlAzar()
+            }       
+            
+        }
+    } 
+       
+       
+   } while (hayCuadradosVacios);
+    
+    
+   }
+
+     
 
 
 const buscarMatchesHorizontales = () => {
@@ -223,6 +261,7 @@ const buscarMatchesHorizontales = () => {
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
                             borrarMatches(match3)
+                            reacomodarFrutas(match3)
                         }
                     }
                 }
@@ -235,11 +274,7 @@ const buscarMatchesVerticales = () => {
     for (let i = 0; i < grillaJS.length; i++) {
 
         for (let j = 0; j < grillaJS[i].length; j++) {
-            // VERTICALES -match de 3 elementos
-            // Buscar solo si hay mas elementos abajo
-            console.log(`estoy en la posicion: i = ${i} y j =  ${j}`)
-
-            if (grillaJS[i + 1]) {
+           if (grillaJS[i + 1]) {
                 if (grillaJS[i + 2]) {
                     const div1 = document.querySelector(`div[data-x = '${i}'][data-y = '${j}']`)
                     const div2 = document.querySelector(`div[data-x = '${i + 1}'][data-y = '${j}']`)
@@ -250,6 +285,7 @@ const buscarMatchesVerticales = () => {
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
                             borrarMatches(match3)
+                            reacomodarFrutas(match3)
                         }
                     }
                 }
@@ -381,3 +417,4 @@ const iniciarJuego = () => {
 window.onload = () => {
     iniciarJuego()
 }
+
