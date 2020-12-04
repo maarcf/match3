@@ -301,7 +301,7 @@ const crearGrillaSinMatches = (frutas) => {
 
 const iniciarModales = () => {
     darBienvenida()
-    // elegirDificultad()
+    
 }
 
 
@@ -327,23 +327,20 @@ const elegirDificultad = () => {
         columnas = 7;
         crearGrillaSinMatches(frutas)
     }
-    // // ************************************************************************************************ //
-    // // Esto tiene que ser los botones del modal//
-    // let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
-    // rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
-    // // ************************************************************************************************ //
-
-    // if (rtaUsuarioDificultad === 'facil') {
-    //     columnas = 9;
-    // } else if (rtaUsuarioDificultad === 'mediano') {
-    //     columnas = 8;
-    // } else if (rtaUsuarioDificultad === 'dificil') {
-    //     columnas = 7;
-    // } else {
-    //     return alert('formato NO valido')
-    // }
+    
 }
 
+const pedirAyuda=()=>{
+    modalBienvenida.classList.remove('hidden')
+    botonAJugar.onclick=()=>{
+        modalBienvenida.classList.add('hidden')
+    }
+}
+
+botonAyuda.onclick=()=>{
+    pedirAyuda()
+   
+}
 
 
 
