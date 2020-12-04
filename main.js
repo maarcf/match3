@@ -207,34 +207,40 @@ const hayMatch = () => {
 }
 
 const hayCuadradosVacios = () => {
+
+    const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+    
     for(let cuadrado of cuadradosDeGrillaHTML){
         if(cuadrado.innerHTML === ""){
            return true 
         } 
+    }
 }
 
 const reacomodarFrutas = (matches) => {
-    
+
+const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+
    do {
-    const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+
+   
 
     for(let cuadrado of cuadradosDeGrillaHTML){
     
-    let dataX = cuadrado.dataset.x
-    let dataY = cuadrado.dataset.y
+        let dataX = Number(cuadrado.dataset.x)
+        let dataY = Number(cuadrado.dataset.y)
 
-    const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
-           
+        const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
 
-        if(cuadrado.innerHTML === ""){
-            
-            if(dataX != 0){ // en fila superior generar fruta
-                intercambiarCuadrados(cuadrado, cuadradoSuperior)
-            }else {
-                cuadrado = obtenerItemAlAzar()
-            }       
-            
-        }
+            if(cuadrado.innerHTML === ""){
+                
+                if(dataX != 0){ // en fila superior generar fruta
+                    intercambiarCuadrados(cuadrado, cuadradoSuperior)
+                }else {
+                    cuadrado = obtenerItemAlAzar(frutas)
+                }       
+                
+            }
     } 
        
        
