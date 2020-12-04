@@ -12,28 +12,6 @@ const dificultadMediano = document.getElementById('mediano');
 const dificultadDificil = document.getElementById('dificil');
 
 
-
-
-botonAyuda.onclick = () => {
-    modalBienvenida.classList.remove('hidden');
-}
-
-botonReiniciar.onclick = () => {
-    modalReiniciarJuego.classList.remove('hidden');
-}
-
-cancelarReiniciar.onclick = () => {
-    modalReiniciarJuego.classList.add('hidden');
-}
-
-nuevoJuegoReiniciar.onclick = () => {
-    modalReiniciarJuego.classList.add('hidden');
-    modalDificultad.classList.remove('hidden');
-}
-
-
-
-
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *         VARIABLES GLOBALES Y CONFIGURACION
@@ -307,18 +285,25 @@ const crearGrillaSinMatches = (frutas) => {
  *                MODALES
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
-const darBienvenida = () => {
+
+
+
+
+ const darBienvenida = () => {
     modalBienvenida.classList.remove('hidden')
 
     botonAJugar.onclick = () => {
         modalBienvenida.classList.add('hidden');
+        elegirDificultad()
     }
+    
 }
 
 const iniciarModales = () => {
     darBienvenida()
-    elegirDificultad()
+    // elegirDificultad()
 }
+
 
 
 const elegirDificultad = () => {
@@ -328,16 +313,19 @@ const elegirDificultad = () => {
     dificultadFacil.onclick=()=>{
         modalDificultad.classList.add('hidden');
         columnas = 9;
+        crearGrillaSinMatches(frutas)
     }
 
     dificultadMediano.onclick=()=>{
         modalDificultad.classList.add('hidden');
         columnas = 8;
+        crearGrillaSinMatches(frutas)
     }
 
     dificultadDificil.onclick=()=>{
         modalDificultad.classList.add('hidden');
         columnas = 7;
+        crearGrillaSinMatches(frutas)
     }
     // // ************************************************************************************************ //
     // // Esto tiene que ser los botones del modal//
@@ -367,20 +355,30 @@ const elegirDificultad = () => {
  */
 
 // REINICIAR JUEGO
-const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
 
 const reiniciarJuego = () => {
     borrarGrilla()
     elegirDificultad()
-    crearGrillaSinMatches(frutas)
+    
 }
 
-botonReiniciarJuego.onclick = () => reiniciarJuego()
+botonReiniciar.onclick = () => {
+    modalReiniciarJuego.classList.remove('hidden')
+
+    nuevoJuegoReiniciar.onclick=()=>{
+        modalReiniciarJuego.classList.add('hidden')
+        elegirDificultad()
+    }
+
+    cancelarReiniciar.onclick = () => {
+        modalReiniciarJuego.classList.add('hidden')
+    }
+ 
+}
 
 
 const iniciarJuego = () => {
     iniciarModales()
-    crearGrillaSinMatches(frutas)
 }
 
 window.onload = () => {
