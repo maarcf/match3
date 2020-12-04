@@ -7,31 +7,9 @@ const botonReiniciar = document.getElementById('boton-reiniciar');
 const botonAJugar = document.getElementById('inicio-juego');
 const cancelarReiniciar = document.getElementById('cancelar');
 const nuevoJuegoReiniciar = document.getElementById('nuevo-juego-reiniciar');
-
-botonAJugar.onclick = () => {
-    modalBienvenida.classList.add('hidden');
-    modalDificultad.classList.remove('hidden');
-
-}
-
-botonAyuda.onclick = () => {
-    modalBienvenida.classList.remove('hidden');
-}
-
-botonReiniciar.onclick = () => {
-    modalReiniciarJuego.classList.remove('hidden');
-}
-
-cancelarReiniciar.onclick = () => {
-    modalReiniciarJuego.classList.add('hidden');
-}
-
-nuevoJuegoReiniciar.onclick = () => {
-    modalReiniciarJuego.classList.add('hidden');
-    modalDificultad.classList.remove('hidden');
-}
-
-
+const dificultadFacil = document.getElementById('facil');
+const dificultadMediano = document.getElementById('mediano');
+const dificultadDificil = document.getElementById('dificil');
 
 
 /**
@@ -300,25 +278,6 @@ const crearGrillaSinMatches = (frutas) => {
 
 
 
-const elegirDificultad = () => {
-
-    // ************************************************************************************************ //
-    // Esto tiene que ser los botones del modal//
-    let rtaUsuarioDificultad = prompt('¿En qué dificultad quiere jugar: FÁCIL, MEDIANO o DIFÍCIL?')
-    rtaUsuarioDificultad = rtaUsuarioDificultad.toLowerCase();
-    // ************************************************************************************************ //
-
-    if (rtaUsuarioDificultad === 'facil') {
-        columnas = 9;
-    } else if (rtaUsuarioDificultad === 'mediano') {
-        columnas = 8;
-    } else if (rtaUsuarioDificultad === 'dificil') {
-        columnas = 7;
-    } else {
-        return alert('formato NO valido')
-    }
-}
-
 
 
 /**
@@ -326,15 +285,62 @@ const elegirDificultad = () => {
  *                MODALES
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
-const darBienvenida = () => {
-    console.log("aca se puede meter el codigo del modal de bienvenida")
+
+
+
+
+ const darBienvenida = () => {
+    modalBienvenida.classList.remove('hidden')
+
+    botonAJugar.onclick = () => {
+        modalBienvenida.classList.add('hidden');
+        elegirDificultad()
+    }
+    
 }
 
 const iniciarModales = () => {
     darBienvenida()
-    elegirDificultad()
+    
 }
 
+
+
+const elegirDificultad = () => {
+
+    modalDificultad.classList.remove('hidden');
+
+    dificultadFacil.onclick=()=>{
+        modalDificultad.classList.add('hidden');
+        columnas = 9;
+        crearGrillaSinMatches(frutas)
+    }
+
+    dificultadMediano.onclick=()=>{
+        modalDificultad.classList.add('hidden');
+        columnas = 8;
+        crearGrillaSinMatches(frutas)
+    }
+
+    dificultadDificil.onclick=()=>{
+        modalDificultad.classList.add('hidden');
+        columnas = 7;
+        crearGrillaSinMatches(frutas)
+    }
+    
+}
+
+const pedirAyuda=()=>{
+    modalBienvenida.classList.remove('hidden')
+    botonAJugar.onclick=()=>{
+        modalBienvenida.classList.add('hidden')
+    }
+}
+
+botonAyuda.onclick=()=>{
+    pedirAyuda()
+   
+}
 
 
 
@@ -346,20 +352,30 @@ const iniciarModales = () => {
  */
 
 // REINICIAR JUEGO
-const botonReiniciarJuego = document.querySelector('#boton-reiniciar')
 
 const reiniciarJuego = () => {
     borrarGrilla()
     elegirDificultad()
-    crearGrillaSinMatches(frutas)
+    
 }
 
-botonReiniciarJuego.onclick = () => reiniciarJuego()
+botonReiniciar.onclick = () => {
+    modalReiniciarJuego.classList.remove('hidden')
+
+    nuevoJuegoReiniciar.onclick=()=>{
+        modalReiniciarJuego.classList.add('hidden')
+        elegirDificultad()
+    }
+
+    cancelarReiniciar.onclick = () => {
+        modalReiniciarJuego.classList.add('hidden')
+    }
+ 
+}
 
 
 const iniciarJuego = () => {
     iniciarModales()
-    crearGrillaSinMatches(frutas)
 }
 
 window.onload = () => {
