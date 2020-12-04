@@ -143,6 +143,10 @@ body {
     border: 1px solid #ffffff;
 }
 
+.desaparecer-item{
+    transform: scale(0);
+
+}
 
 /* MODALES -----------------------------------------------------------------------------------------------------------------------------------*/
 .overlay {
@@ -176,7 +180,9 @@ body {
     justify-content: center;
 }
 
-
+.modal>p{
+    font-weight: bold;
+}
 .modal-botones {
     width: 250px;
     display: flex;
@@ -200,5 +206,8 @@ body {
 }
 
 
-
+#boton-reiniciar>i:hover{
+ transform: rotate(0);
+ transition: 0.2s;
+}
 

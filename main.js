@@ -11,7 +11,6 @@ const dificultadFacil = document.getElementById('facil');
 const dificultadMediano = document.getElementById('mediano');
 const dificultadDificil = document.getElementById('dificil');
 
-
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *         VARIABLES GLOBALES Y CONFIGURACION
@@ -186,6 +185,7 @@ const seleccionarItem = (e) => {
 const borrarMatches = (matches) => {
     for (let div of matches) {
         div.innerHTML = ""
+        div.classList.add('desaparecer-item')
     }
 }
 
@@ -360,6 +360,7 @@ const reiniciarJuego = () => {
 }
 
 botonReiniciar.onclick = () => {
+
     modalReiniciarJuego.classList.remove('hidden')
 
     nuevoJuegoReiniciar.onclick=()=>{
