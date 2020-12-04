@@ -300,6 +300,27 @@ const crearGrillaSinMatches = (frutas) => {
 
 
 
+
+
+/**
+ * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
+ *                MODALES
+ * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
+ */
+const darBienvenida = () => {
+    modalBienvenida.classList.remove('hidden')
+
+    botonAJugar.onclick = () => {
+        modalBienvenida.classList.add('hidden');
+    }
+}
+
+const iniciarModales = () => {
+    darBienvenida()
+    elegirDificultad()
+}
+
+
 const elegirDificultad = () => {
 
     modalDificultad.classList.remove('hidden');
@@ -333,28 +354,6 @@ const elegirDificultad = () => {
     // } else {
     //     return alert('formato NO valido')
     // }
-}
-
-
-
-/**
- * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
- *                MODALES
- * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
- */
-const darBienvenida = () => {
-   
-    modalBienvenida.classList.remove('hidden')
-
-    botonAJugar.onclick = () => {
-        modalBienvenida.classList.add('hidden');
-        elegirDificultad()
-    }
-}
-
-const iniciarModales = () => {
-    darBienvenida()
-    
 }
 
 
