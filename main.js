@@ -185,7 +185,14 @@ const seleccionarItem = (e) => {
 
 const borrarMatches = (matches) => {
     for (let div of matches) {
-        div.innerHTML = ""
+        console.log(div)
+        setTimeout(()=>{
+            console.log('desaparecer item')
+            div.classList.add('desaparecer-item')
+            div.innerHTML = "" } , 500)
+        
+        
+        
     }
 }
 
@@ -237,7 +244,7 @@ const buscarMatchesVerticales = () => {
         for (let j = 0; j < grillaJS[i].length; j++) {
             // VERTICALES -match de 3 elementos
             // Buscar solo si hay mas elementos abajo
-            console.log(`estoy en la posicion: i = ${i} y j =  ${j}`)
+            // console.log(`estoy en la posicion: i = ${i} y j =  ${j}`)
 
             if (grillaJS[i + 1]) {
                 if (grillaJS[i + 2]) {

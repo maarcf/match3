@@ -145,7 +145,8 @@ body {
 
 .desaparecer-item{
     transform: scale(0);
-
+    transition: 1.5s;
+    
 }
 
 /* MODALES -----------------------------------------------------------------------------------------------------------------------------------*/
@@ -203,7 +204,7 @@ body {
     display: none;
 }
 
-
+/* Animación de boton reiniciar */
 #boton-reiniciar{
     transition: 0.3s;
 }
