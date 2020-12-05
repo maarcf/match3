@@ -270,7 +270,7 @@ const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
     } 
        
        
-   } while (hayCuadradosVacios);
+     } while (hayCuadradosVacios());
     
     
    }
