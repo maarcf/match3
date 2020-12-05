@@ -1,15 +1,3 @@
-const modalBienvenida = document.getElementById('modal-bienvenida');
-const modalDificultad = document.getElementById('modal-dificultad');
-const modalGameOver = document.getElementById('modal-gameover');
-const modalReiniciarJuego = document.getElementById('modal-reiniciar');
-const botonAyuda = document.getElementById('boton-ayuda');
-const botonReiniciar = document.getElementById('boton-reiniciar');
-const botonAJugar = document.getElementById('inicio-juego');
-const cancelarReiniciar = document.getElementById('cancelar');
-const nuevoJuegoReiniciar = document.getElementById('nuevo-juego-reiniciar');
-const dificultadFacil = document.getElementById('facil');
-const dificultadMediano = document.getElementById('mediano');
-const dificultadDificil = document.getElementById('dificil');
 
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
@@ -286,6 +274,18 @@ const crearGrillaSinMatches = (frutas) => {
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
 
+const modalBienvenida = document.getElementById('modal-bienvenida');
+const modalDificultad = document.getElementById('modal-dificultad');
+const modalGameOver = document.getElementById('modal-gameover');
+const modalReiniciarJuego = document.getElementById('modal-reiniciar');
+const botonAyuda = document.getElementById('boton-ayuda');
+const botonReiniciar = document.getElementById('boton-reiniciar');
+const botonAJugar = document.getElementById('inicio-juego');
+const cancelarReiniciar = document.getElementById('cancelar');
+const nuevoJuegoReiniciar = document.getElementById('nuevo-juego-reiniciar');
+const dificultadFacil = document.getElementById('facil');
+const dificultadMediano = document.getElementById('mediano');
+const dificultadDificil = document.getElementById('dificil');
 
 
 
