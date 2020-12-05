@@ -217,36 +217,87 @@ const hayCuadradosVacios = () => {
     }
 }
 
+const intercambiarPositionEnHTML = (cuadrado1, cuadrado2) =>{
+    let top1 = cuadrado1.style.top 
+    let left1 = cuadrado1.style.left
+ 
+    let top2 = cuadrado2.style.top
+    let left2 = cuadrado2.style.left
+ 
+    // intercambio position en html-css
+    cuadrado1.style.top = top2
+    cuadrado1.style.left = left2
+ 
+    cuadrado2.style.top = top1
+    cuadrado2.style.left = left2
+ 
+ }
+ const intercambiarDataSetEnJS = (cuadrado1, cuadrado2) => {
+   let dataX1 = cuadrado1.dataset.x
+   let dataY1 = cuadrado1.dataset.y
+ 
+   let dataX2 = cuadrado2.dataset.x
+   let dataY2 = cuadrado2.dataset.y
+ 
+   // intercambio dataset
+   cuadrado1.dataset.x = dataX2
+   cuadrado1.dataset.y = dataY2
+   cuadrado2.dataset.x = dataX1
+   cuadrado2.dataset.y = dataY1
+   
+ }
+const intercambiarConDivSuperior = (cuadrado) => {
+
+    let dataX = cuadrado.dataset.x
+    let dataY = cuadrado.dataset.y
+     // selecciono el div de arriba
+     const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
+  
+    intercambiarDataSetEnJS(cuadrado, cuadradoSuperior)
+    intercambiarPositionEnHTML(cuadrado, cuadradoSuperior)
+  }
+
+
 const reacomodarFrutas = () => {
 
 console.log("reacomodando frutitas")
 
 const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
-console.log(cuadradosDeGrillaHTML)
 
-console.log(hayCuadradosVacios())
-
-    if(hayCuadradosVacios()){
+    do {
         for(let cuadrado of cuadradosDeGrillaHTML){
 
-                let dataX = Number(cuadrado.dataset.x)
-                let dataY = Number(cuadrado.dataset.y)
+            let dataX = Number(cuadrado.dataset.x)
+            let dataY = Number(cuadrado.dataset.y)
+            const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`)
 
             if(cuadrado.innerHTML === "" ){
 
-                console.log("estoy rellenando espacios vacios")    
-                grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
-                console.log(grillaJS[dataX][dataY])
-                cuadrado.innerHTML =  grillaJS[dataX][dataY] 
-                cuadrado.classList.toggle("desaparecer-item")
-                console.log(cuadrado.innerHTML)
-            
+                if(dataX != 0){
+
+                    intercambiarConDivSuperior(cuadrado)
+                   
+                    cuadrado.classList.toggle("desaparecer-item") 
+                    cuadrado.addEventListener('click', seleccionarItem)
+                    
+                }else {
+                    console.log("estoy rellenando espacios vacios")    
+                    grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
+                    console.log(grillaJS[dataX][dataY])
+                    cuadrado.innerHTML =  grillaJS[dataX][dataY] 
+                    cuadrado.classList.toggle("desaparecer-item")
+                    console.log(cuadrado.innerHTML)
+                    cuadrado.addEventListener('click', seleccionarItem)
+   
+                        
+                }
+                
             }
-          
-        }
         
-    }
- 
+        }
+
+    } while (hayCuadradosVacios());
+
 }
 
      
