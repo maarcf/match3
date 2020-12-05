@@ -91,6 +91,8 @@ const generarCuadrado = (x, y) => {
 
     cuadrado.innerHTML = grillaJS[y][x]
 
+   
+
     cuadrado.style.top = `${y * anchoDeDiv}px`
     cuadrado.style.left = `${x * anchoDeDiv}px`
     cuadrado.style.width = `${anchoDeDiv}px`
@@ -316,7 +318,6 @@ const buscarMatches = () => {
 
 
 const crearGrillaSinMatches = (frutas) => {
-
     do {
         borrarGrilla()
         crearGrilla(frutas)
@@ -327,16 +328,11 @@ const crearGrillaSinMatches = (frutas) => {
 
 
 
-
-
-
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *                MODALES
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
-
-
 
 
  const darBienvenida = () => {
@@ -423,29 +419,8 @@ botonReiniciar.onclick = () => {
  
 }
 
-const escucharClicksEnCuadrados = () => {
-
-const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
-
-    for(let cuadrado of cuadradosDeGrillaHTML){
-         cuadrado.onclick = () => {
-             console.log("hiciste click en cuadrado")
-             seleccionarItem()
-             let todosLosMatches = buscarMatches()
-             borrarMatches(todosLosMatches)
-             reacomodarFrutas()
-         }
-    }    
-   
-}
-
-const iniciarJuego = () => {
-    console.log("iniciaste el juego")
-    escucharClicksEnCuadrados()
-}
 
 window.onload = () => {
     iniciarModales()
-    iniciarJuego()
 }
 
