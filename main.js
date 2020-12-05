@@ -77,9 +77,8 @@ const generarCuadrado = (x, y) => {
     cuadrado.dataset.y = x
 
     cuadrado.innerHTML = grillaJS[y][x]
-
+    cuadrado.addEventListener('click', seleccionarItem)
    
-
     cuadrado.style.top = `${y * anchoDeDiv}px`
     cuadrado.style.left = `${x * anchoDeDiv}px`
     cuadrado.style.width = `${anchoDeDiv}px`
@@ -152,7 +151,19 @@ const seleccionarItem = (e) => {
 
     if (primerCuadrado != null) {
         if (sonAdyacentes(primerCuadrado, e.target)) {
+            console.log("son adyacentes, intercambiense")
             intercambiarCuadrados(primerCuadrado, e.target)
+
+            if(hayMatch()){
+               console.log("hay match, buscalos, borralos y reacomoda")
+               buscarMatches()
+               reacomodarFrutas()
+               
+            }else {
+                console.log("no hay match, volve a tu lugar")
+                intercambiarCuadrados(primerCuadrado, e.target)
+            }
+            
         } else {
             primerCuadrado.classList.remove("seleccionado")
             e.target.classList.add("seleccionado")
@@ -208,33 +219,35 @@ const hayCuadradosVacios = () => {
 
 const reacomodarFrutas = () => {
 
+console.log("reacomodando frutitas")
+
 const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+console.log(cuadradosDeGrillaHTML)
 
-   do { 
+console.log(hayCuadradosVacios())
 
-    for(let cuadrado of cuadradosDeGrillaHTML){
-    
-        let dataX = Number(cuadrado.dataset.x)
-        let dataY = Number(cuadrado.dataset.y)
+    if(hayCuadradosVacios()){
+        for(let cuadrado of cuadradosDeGrillaHTML){
 
-        const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
+                let dataX = Number(cuadrado.dataset.x)
+                let dataY = Number(cuadrado.dataset.y)
 
-            if(cuadrado.innerHTML === ""){
-                
-                if(dataX != 0){ // en fila superior generar fruta
-                    console.log("data distinto a cero")
-                    intercambiarCuadrados(cuadrado, cuadradoSuperior)
-                }else {
-                    cuadrado = obtenerItemAlAzar(frutas)
-                }                   
+            if(cuadrado.innerHTML === "" ){
+
+                console.log("estoy rellenando espacios vacios")    
+                grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
+                console.log(grillaJS[dataX][dataY])
+                cuadrado.innerHTML =  grillaJS[dataX][dataY] 
+                cuadrado.classList.toggle("desaparecer-item")
+                console.log(cuadrado.innerHTML)
+            
             }
-    } 
-       
-       
-     } while (hayCuadradosVacios());
-    
-    
-   }
+          
+        }
+        
+    }
+ 
+}
 
      
 
@@ -253,8 +266,8 @@ const buscarMatchesHorizontales = () => {
 
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            return match3
-                        }
+                            borrarMatches(match3)
+                       }
                     }
                 }
             }
@@ -276,7 +289,7 @@ const buscarMatchesVerticales = () => {
 
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            return match3
+                            borrarMatches(match3)
                         }
                     }
                 }
@@ -287,20 +300,9 @@ const buscarMatchesVerticales = () => {
 
 
 const buscarMatches = () => {
-    let matchesH =  buscarMatchesHorizontales()
-    let matchesV = buscarMatchesVerticales()
-    let todosLosMatches = []
-     
-    if(matchesH && matchesV){
-        for(let m of matchesV) {
-            matchesH.push(m)     
-        }
-        todosLosMatches = matchesH
-    }else if(matchesH){
-        return matchesH
-    }else if(matchesV){
-        return matchesH
-    }else return null
+  
+    buscarMatchesHorizontales()
+    buscarMatchesVerticales()
 
 }
 
