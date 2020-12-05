@@ -89,8 +89,6 @@ const generarCuadrado = (x, y) => {
 
     cuadrado.innerHTML = grillaJS[y][x]
 
-    cuadrado.addEventListener('click', seleccionarItem)
-
     cuadrado.style.top = `${y * anchoDeDiv}px`
     cuadrado.style.left = `${x * anchoDeDiv}px`
     cuadrado.style.width = `${anchoDeDiv}px`
@@ -167,7 +165,7 @@ const intercambiarCuadrados = (elem1, elem2) => {
         elem2.dataset.x = datax1
     }
 
-    buscarMatches()
+   
 }
 
 
@@ -244,7 +242,7 @@ const hayCuadradosVacios = () => {
     }
 }
 
-const reacomodarFrutas = (matches) => {
+const reacomodarFrutas = () => {
 
 const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
 
@@ -264,8 +262,7 @@ const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
                     intercambiarCuadradosParaBajar(cuadrado, cuadradoSuperior)
                 }else {
                     cuadrado = obtenerItemAlAzar(frutas)
-                }       
-                
+                }                   
             }
     } 
        
@@ -328,8 +325,15 @@ const buscarMatchesVerticales = () => {
 
 
 const buscarMatches = () => {
-    buscarMatchesHorizontales()
-    buscarMatchesVerticales()
+    let matchesH =  buscarMatchesHorizontales()
+    let matchesV = buscarMatchesVerticales()
+    let todosLosMatches = []
+     
+    for(let m of matchesV) {
+        matchesH.push(m)     
+    }
+    todosLosMatches = matchesH
+    return todosLosMatches
 }
 
 
@@ -441,12 +445,28 @@ botonReiniciar.onclick = () => {
  
 }
 
+const escucharClicksEnCuadrados = () => {
+const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+
+    for(let cuadrado of cuadradosDeGrillaHTML){
+         cuadrado.onclick = () => {
+             seleccionarItem()
+             let todosLosMatches = buscarMatches()
+             borrarMatches(todosLosMatches)
+             reacomodarFrutas()
+         }
+    }    
+   
+}
 
 const iniciarJuego = () => {
-    iniciarModales()
+
+    escucharClicksEnCuadrados()
+
 }
 
 window.onload = () => {
+    iniciarModales()
     iniciarJuego()
 }
 
