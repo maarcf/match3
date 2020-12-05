@@ -145,8 +145,11 @@ body {
 
 .desaparecer-item{
     transform: scale(0);
-    transition: 1.5s;
-    
+   
+}
+
+.item.desaparecer-item{
+    transition: 5s ;
 }
 
 /* MODALES -----------------------------------------------------------------------------------------------------------------------------------*/

@@ -185,14 +185,15 @@ const seleccionarItem = (e) => {
 
 const borrarMatches = (matches) => {
     for (let div of matches) {
-        console.log(div)
-        setTimeout(()=>{
-            console.log('desaparecer item')
-            div.classList.add('desaparecer-item')
-            div.innerHTML = "" } , 500)
-        
-        
-        
+
+        setTimeout(() => {
+            div.classList.remove('seleccionado')
+            // div.classList.add('desaparecer-item')
+            // div.style.transition = '5s'
+            // div.style.transform = 'scale(0)'
+            div.innerHTML = ""
+        }, 500)
+
     }
 }
 
@@ -242,10 +243,7 @@ const buscarMatchesVerticales = () => {
     for (let i = 0; i < grillaJS.length; i++) {
 
         for (let j = 0; j < grillaJS[i].length; j++) {
-            // VERTICALES -match de 3 elementos
-            // Buscar solo si hay mas elementos abajo
-            // console.log(`estoy en la posicion: i = ${i} y j =  ${j}`)
-
+          
             if (grillaJS[i + 1]) {
                 if (grillaJS[i + 2]) {
                     const div1 = document.querySelector(`div[data-x = '${i}'][data-y = '${j}']`)
@@ -296,19 +294,19 @@ const crearGrillaSinMatches = (frutas) => {
 
 
 
- const darBienvenida = () => {
+const darBienvenida = () => {
     modalBienvenida.classList.remove('hidden')
 
     botonAJugar.onclick = () => {
         modalBienvenida.classList.add('hidden');
         elegirDificultad()
     }
-    
+
 }
 
 const iniciarModales = () => {
     darBienvenida()
-    
+
 }
 
 
@@ -317,36 +315,36 @@ const elegirDificultad = () => {
 
     modalDificultad.classList.remove('hidden');
 
-    dificultadFacil.onclick=()=>{
+    dificultadFacil.onclick = () => {
         modalDificultad.classList.add('hidden');
         columnas = 9;
         crearGrillaSinMatches(frutas)
     }
 
-    dificultadMediano.onclick=()=>{
+    dificultadMediano.onclick = () => {
         modalDificultad.classList.add('hidden');
         columnas = 8;
         crearGrillaSinMatches(frutas)
     }
 
-    dificultadDificil.onclick=()=>{
+    dificultadDificil.onclick = () => {
         modalDificultad.classList.add('hidden');
         columnas = 7;
         crearGrillaSinMatches(frutas)
     }
-    
+
 }
 
-const pedirAyuda=()=>{
+const pedirAyuda = () => {
     modalBienvenida.classList.remove('hidden')
-    botonAJugar.onclick=()=>{
+    botonAJugar.onclick = () => {
         modalBienvenida.classList.add('hidden')
     }
 }
 
-botonAyuda.onclick=()=>{
+botonAyuda.onclick = () => {
     pedirAyuda()
-   
+
 }
 
 
@@ -363,13 +361,13 @@ botonAyuda.onclick=()=>{
 const reiniciarJuego = () => {
     borrarGrilla()
     elegirDificultad()
-    
+
 }
 
 botonReiniciar.onclick = () => {
     modalReiniciarJuego.classList.remove('hidden')
 
-    nuevoJuegoReiniciar.onclick=()=>{
+    nuevoJuegoReiniciar.onclick = () => {
         modalReiniciarJuego.classList.add('hidden')
         elegirDificultad()
     }
@@ -377,7 +375,7 @@ botonReiniciar.onclick = () => {
     cancelarReiniciar.onclick = () => {
         modalReiniciarJuego.classList.add('hidden')
     }
- 
+
 }
 
 
