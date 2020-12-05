@@ -261,6 +261,7 @@ const crearGrillaSinMatches = (frutas) => {
     }
     while (hayMatch() === true)
 
+    modificarTiempoHTML()
 }
 
 
@@ -341,6 +342,27 @@ botonAyuda.onclick=()=>{
     pedirAyuda()
    
 }
+
+
+// Reloj
+const tiempoHTML = document.getElementById('tiempo-de-juego');
+
+let tiempoJS = 30
+
+    console.log(tiempoJS)
+    const modificarTiempoHTML = () => {    
+        
+        if  (tiempoJS >= 0) {
+            tiempoHTML.textContent = `0:${tiempoJS}`;
+            tiempoJS--
+        }
+        else {
+            //modal finalizar juego
+        }
+        
+        setTimeout(modificarTiempoHTML, 1000);
+
+    }
 
 
 
