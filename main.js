@@ -30,9 +30,11 @@ const obtenerItemAlAzar = (array) => {
 const borrarGrilla = () => {
     grillaHTML.innerHTML = ""
     grillaJS = [];
-
 }
 
+const obtenerCuadrado = (x, y) => {
+    return document.querySelector(`.cuadrado[data-x="${x}"][data-y="${y}"]`)
+  }
 
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
@@ -76,7 +78,7 @@ const generarCuadrado = (x, y) => {
 
     cuadrado.innerHTML = grillaJS[y][x]
 
-    cuadrado.addEventListener('click', seleccionarItem)
+   
 
     cuadrado.style.top = `${y * anchoDeDiv}px`
     cuadrado.style.left = `${x * anchoDeDiv}px`
@@ -126,8 +128,7 @@ const intercambiarCuadrados = (elem1, elem2) => {
         elem1.dataset.x = datax2
         elem2.dataset.x = datax1
     }
-
-    buscarMatches()
+   
 }
 
 
@@ -194,6 +195,48 @@ const hayMatch = () => {
     return false
 }
 
+const hayCuadradosVacios = () => {
+
+    const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+
+    for(let cuadrado of cuadradosDeGrillaHTML){
+        if(cuadrado.innerHTML === ""){
+           return true 
+        } 
+    }
+}
+
+const reacomodarFrutas = () => {
+
+const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
+
+   do { 
+
+    for(let cuadrado of cuadradosDeGrillaHTML){
+    
+        let dataX = Number(cuadrado.dataset.x)
+        let dataY = Number(cuadrado.dataset.y)
+
+        const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
+
+            if(cuadrado.innerHTML === ""){
+                
+                if(dataX != 0){ // en fila superior generar fruta
+                    console.log("data distinto a cero")
+                    intercambiarCuadrados(cuadrado, cuadradoSuperior)
+                }else {
+                    cuadrado = obtenerItemAlAzar(frutas)
+                }                   
+            }
+    } 
+       
+       
+     } while (hayCuadradosVacios());
+    
+    
+   }
+
+     
 
 
 const buscarMatchesHorizontales = () => {
@@ -210,7 +253,7 @@ const buscarMatchesHorizontales = () => {
 
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            borrarMatches(match3)
+                            return match3
                         }
                     }
                 }
@@ -223,11 +266,7 @@ const buscarMatchesVerticales = () => {
     for (let i = 0; i < grillaJS.length; i++) {
 
         for (let j = 0; j < grillaJS[i].length; j++) {
-            // VERTICALES -match de 3 elementos
-            // Buscar solo si hay mas elementos abajo
-            console.log(`estoy en la posicion: i = ${i} y j =  ${j}`)
-
-            if (grillaJS[i + 1]) {
+           if (grillaJS[i + 1]) {
                 if (grillaJS[i + 2]) {
                     const div1 = document.querySelector(`div[data-x = '${i}'][data-y = '${j}']`)
                     const div2 = document.querySelector(`div[data-x = '${i + 1}'][data-y = '${j}']`)
@@ -237,7 +276,7 @@ const buscarMatchesVerticales = () => {
 
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            borrarMatches(match3)
+                            return match3
                         }
                     }
                 }
@@ -248,13 +287,25 @@ const buscarMatchesVerticales = () => {
 
 
 const buscarMatches = () => {
-    buscarMatchesHorizontales()
-    buscarMatchesVerticales()
+    let matchesH =  buscarMatchesHorizontales()
+    let matchesV = buscarMatchesVerticales()
+    let todosLosMatches = []
+     
+    if(matchesH && matchesV){
+        for(let m of matchesV) {
+            matchesH.push(m)     
+        }
+        todosLosMatches = matchesH
+    }else if(matchesH){
+        return matchesH
+    }else if(matchesV){
+        return matchesH
+    }else return null
+
 }
 
 
 const crearGrillaSinMatches = (frutas) => {
-
     do {
         borrarGrilla()
         crearGrilla(frutas)
@@ -262,9 +313,6 @@ const crearGrillaSinMatches = (frutas) => {
     while (hayMatch() === true)
 
 }
-
-
-
 
 
 
@@ -286,8 +334,6 @@ const nuevoJuegoReiniciar = document.getElementById('nuevo-juego-reiniciar');
 const dificultadFacil = document.getElementById('facil');
 const dificultadMediano = document.getElementById('mediano');
 const dificultadDificil = document.getElementById('dificil');
-
-
 
  const darBienvenida = () => {
     modalBienvenida.classList.remove('hidden')
@@ -375,10 +421,7 @@ botonReiniciar.onclick = () => {
 }
 
 
-const iniciarJuego = () => {
+window.onload = () => {
     iniciarModales()
 }
 
-window.onload = () => {
-    iniciarJuego()
-}
