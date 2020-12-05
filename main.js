@@ -115,6 +115,33 @@ const crearGrilla = (items) => {
  *              MOVER ELEMENTOS
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
+const intercambiarCuadradosParaBajar = (elem1, elem2) => {
+    console.log("intercambiar cuadrados para bajar")
+    const datax1 = Number(elem1.dataset.x)
+    const datax2 = Number(elem2.dataset.x)
+    const datay1 = Number(elem1.dataset.y)
+    const datay2 = Number(elem2.dataset.y)
+
+    // aquí modifico grilla JS
+    let variableTemporal = grillaJS[datax1][datay1]
+    grillaJS[datax1][datay1] = grillaJS[datax2][datay2]
+    grillaJS[datax2][datay2] = variableTemporal
+
+    // acá modifico grilla HTML
+    if (datax1 === datax2 && (datay1 === datay2 + 1 || datay1 === datay2 - 1)) {
+        elem1.style.left = `${datay2 * anchoDeDiv}px`
+        elem2.style.left = `${datay1 * anchoDeDiv}px`
+        elem1.dataset.y = datay2
+        elem2.dataset.y = datay1
+    } else if (datay1 === datay2 && (datax1 === datax2 + 1 || datax1 === datax2 - 1)) {
+        elem1.style.top = `${datax2 * anchoDeDiv}px`
+        elem2.style.top = `${datax1 * anchoDeDiv}px`
+        elem1.dataset.x = datax2
+        elem2.dataset.x = datax1
+    }
+
+    
+}
 
 const intercambiarCuadrados = (elem1, elem2) => {
     const datax1 = Number(elem1.dataset.x)
@@ -209,7 +236,7 @@ const hayMatch = () => {
 const hayCuadradosVacios = () => {
 
     const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
-    
+
     for(let cuadrado of cuadradosDeGrillaHTML){
         if(cuadrado.innerHTML === ""){
            return true 
@@ -221,9 +248,7 @@ const reacomodarFrutas = (matches) => {
 
 const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
 
-   do {
-
-   
+   do { 
 
     for(let cuadrado of cuadradosDeGrillaHTML){
     
@@ -235,7 +260,8 @@ const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
             if(cuadrado.innerHTML === ""){
                 
                 if(dataX != 0){ // en fila superior generar fruta
-                    intercambiarCuadrados(cuadrado, cuadradoSuperior)
+                    console.log("data distinto a cero")
+                    intercambiarCuadradosParaBajar(cuadrado, cuadradoSuperior)
                 }else {
                     cuadrado = obtenerItemAlAzar(frutas)
                 }       
