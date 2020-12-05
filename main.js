@@ -157,6 +157,7 @@ const seleccionarItem = (e) => {
             if(hayMatch()){
                console.log("hay match, buscalos, borralos y reacomoda")
                buscarMatches()
+               reacomodarFrutas()
                
             }else {
                 console.log("no hay match, volve a tu lugar")
@@ -218,27 +219,35 @@ const hayCuadradosVacios = () => {
 
 const reacomodarFrutas = () => {
 
+console.log("reacomodando frutitas")
+
 const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
 console.log(cuadradosDeGrillaHTML)
-   do { 
 
-    for(let cuadrado of cuadradosDeGrillaHTML){
-    
-        let dataX = Number(cuadrado.dataset.x)
-        let dataY = Number(cuadrado.dataset.y)
+console.log(hayCuadradosVacios())
 
-        const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
+    if(hayCuadradosVacios()){
+        for(let cuadrado of cuadradosDeGrillaHTML){
 
-            if(cuadrado.innerHTML === ""){
-               console.log("soy un cuadrado vacio")            
+                let dataX = Number(cuadrado.dataset.x)
+                let dataY = Number(cuadrado.dataset.y)
+
+            if(cuadrado.innerHTML === "" ){
+
+                console.log("estoy rellenando espacios vacios")    
+                grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
+                console.log(grillaJS[dataX][dataY])
+                cuadrado.innerHTML =  grillaJS[dataX][dataY] 
+                cuadrado.classList.toggle("desaparecer-item")
+                console.log(cuadrado.innerHTML)
+            
             }
-    } 
-       
-       
-     } while (hayCuadradosVacios());
-    
-    
-   }
+          
+        }
+        
+    }
+ 
+}
 
      
 
@@ -258,8 +267,7 @@ const buscarMatchesHorizontales = () => {
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
                             borrarMatches(match3)
-                            reacomodarFrutas()
-                        }
+                       }
                     }
                 }
             }
@@ -282,7 +290,6 @@ const buscarMatchesVerticales = () => {
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
                             borrarMatches(match3)
-                            reacomodarFrutas()
                         }
                     }
                 }
