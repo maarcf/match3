@@ -77,9 +77,8 @@ const generarCuadrado = (x, y) => {
     cuadrado.dataset.y = x
 
     cuadrado.innerHTML = grillaJS[y][x]
-
+    cuadrado.addEventListener('click', seleccionarItem)
    
-
     cuadrado.style.top = `${y * anchoDeDiv}px`
     cuadrado.style.left = `${x * anchoDeDiv}px`
     cuadrado.style.width = `${anchoDeDiv}px`
@@ -152,7 +151,18 @@ const seleccionarItem = (e) => {
 
     if (primerCuadrado != null) {
         if (sonAdyacentes(primerCuadrado, e.target)) {
+            console.log("son adyacentes, intercambiense")
             intercambiarCuadrados(primerCuadrado, e.target)
+
+            if(hayMatch()){
+               console.log("hay match, buscalos, borralos y reacomoda")
+               buscarMatches()
+               
+            }else {
+                console.log("no hay match, volve a tu lugar")
+                intercambiarCuadrados(primerCuadrado, e.target)
+            }
+            
         } else {
             primerCuadrado.classList.remove("seleccionado")
             e.target.classList.add("seleccionado")
@@ -209,7 +219,7 @@ const hayCuadradosVacios = () => {
 const reacomodarFrutas = () => {
 
 const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
-
+console.log(cuadradosDeGrillaHTML)
    do { 
 
     for(let cuadrado of cuadradosDeGrillaHTML){
@@ -220,13 +230,7 @@ const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
         const cuadradoSuperior = document.querySelector(`div[data-x = '${dataX - 1}'][data-y = '${dataY}']`) 
 
             if(cuadrado.innerHTML === ""){
-                
-                if(dataX != 0){ // en fila superior generar fruta
-                    console.log("data distinto a cero")
-                    intercambiarCuadrados(cuadrado, cuadradoSuperior)
-                }else {
-                    cuadrado = obtenerItemAlAzar(frutas)
-                }                   
+               console.log("soy un cuadrado vacio")            
             }
     } 
        
@@ -253,7 +257,8 @@ const buscarMatchesHorizontales = () => {
 
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            return match3
+                            borrarMatches(match3)
+                            reacomodarFrutas()
                         }
                     }
                 }
@@ -276,7 +281,8 @@ const buscarMatchesVerticales = () => {
 
                     for (let div of match3) {
                         if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            return match3
+                            borrarMatches(match3)
+                            reacomodarFrutas()
                         }
                     }
                 }
@@ -287,20 +293,9 @@ const buscarMatchesVerticales = () => {
 
 
 const buscarMatches = () => {
-    let matchesH =  buscarMatchesHorizontales()
-    let matchesV = buscarMatchesVerticales()
-    let todosLosMatches = []
-     
-    if(matchesH && matchesV){
-        for(let m of matchesV) {
-            matchesH.push(m)     
-        }
-        todosLosMatches = matchesH
-    }else if(matchesH){
-        return matchesH
-    }else if(matchesV){
-        return matchesH
-    }else return null
+  
+    buscarMatchesHorizontales()
+    buscarMatchesVerticales()
 
 }
 
