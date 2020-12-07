@@ -254,19 +254,14 @@ const buscarMatches = () => {
 
 
 const crearGrillaSinMatches = (frutas) => {
-    tiempoJS = 30 // funciona que reincia pero empieza a apurarse. como si siguieran los dos relojes.
-
     do {
         borrarGrilla()
         crearGrilla(frutas)
     }
     while (hayMatch() === true)
 
-    comenzarTiempo()
+    reinciarTiempo()
 }
-
-
-
 
 
 
@@ -348,7 +343,8 @@ botonAyuda.onclick=()=>{
 // Reloj
 const tiempoHTML = document.getElementById('tiempo-de-juego');
 
-let tiempoJS = 30
+let tiempoJS = 10
+let reloj = null;
 
     const comenzarTiempo = () => {    
         
@@ -365,17 +361,20 @@ let tiempoJS = 30
             //modal finalizar juego
         }
         
-        setTimeout(comenzarTiempo, 1000);
+        if (tiempoJS >= 0) {
+            reloj = setTimeout(comenzarTiempo, 1000);
+        }
+
+        console.log(tiempoJS)
 
     }
 
-
-    /// no se reincia el tiempo
-    const reiniciarTiempo = () => {
-        tiempoJS = 30;
+    const reinciarTiempo = () => {
+        clearTimeout(reloj)
+        tiempoJS = 30
+        comenzarTiempo()
     }
 
-// Otra opcion pero que a consultar seria ultilizar setInterval y clearInterval.
 
 
 /**
@@ -384,13 +383,10 @@ let tiempoJS = 30
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
 
-// REINICIAR JUEGO
 
 const reiniciarJuego = () => {
     borrarGrilla()
-    elegirDificultad()
-    reiniciarTiempo() //Revisar
-    
+    elegirDificultad()      
 }
 
 botonReiniciar.onclick = () => {
