@@ -314,6 +314,7 @@ const crearGrillaSinMatches = (frutas) => {
     }
     while (hayMatch() === true)
 
+    reinciarTiempo()
 }
 
 
@@ -391,6 +392,39 @@ botonAyuda.onclick=()=>{
 }
 
 
+// Reloj - CountDown
+const tiempoHTML = document.getElementById('tiempo-de-juego');
+
+let tiempoJS = 10
+let reloj = null;
+
+const comenzarTiempo = () => {    
+        
+    if  (tiempoJS >= 10) {
+        tiempoHTML.textContent = `0:${tiempoJS}`;
+        tiempoJS--
+    }
+    else if (tiempoJS <= 10 && tiempoJS >= 0) { 
+        tiempoHTML.textContent = `0:0${tiempoJS}`;
+        tiempoJS--
+    }
+    else {
+        tiempoHTML.textContent = `0:00`;
+        //modal finalizar juego
+    }
+        
+    if (tiempoJS >= 0) {
+        reloj = setTimeout(comenzarTiempo, 1000);
+    }
+
+}
+
+const reinciarTiempo = () => {
+    clearTimeout(reloj)
+    tiempoJS = 30
+    comenzarTiempo()
+}
+
 
 
 /**
@@ -399,12 +433,10 @@ botonAyuda.onclick=()=>{
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
 
-// REINICIAR JUEGO
 
 const reiniciarJuego = () => {
     borrarGrilla()
-    elegirDificultad()
-    
+    elegirDificultad()      
 }
 
 botonReiniciar.onclick = () => {
