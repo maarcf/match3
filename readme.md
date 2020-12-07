@@ -8,11 +8,11 @@ Integrantes del grupo:
 - Pardo, Jessika
 - Reale Portelli, Macarena
 
-### Tecnologías
-El proyecto está hecho con HTML 5, CSS 3 y JavaScript. 
-Podés verlo [aquí](https://maarcf.github.io/match3/)
+## Tecnologías
 
-### Features
+El proyecto está hecho con HTML 5, CSS 3 y JavaScript.
+Podés ver el trabajo haciendo [click aquí](https://maarcf.github.io/match3/)
+ 
 * :small_orange_diamond: Arrays.
 * :small_orange_diamond: Programación Funcional.
 * :small_orange_diamond: Callbacks, Timer.
