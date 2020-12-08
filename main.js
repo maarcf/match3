@@ -342,6 +342,8 @@ botonAyuda.onclick=()=>{
 
 // Reloj - CountDown
 const tiempoHTML = document.getElementById('tiempo-de-juego');
+const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
+const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego');
 
 let tiempoJS = 10
 let reloj = null;
@@ -360,7 +362,6 @@ const comenzarTiempo = () => {
         tiempoHTML.textContent = `0:00`;
         console.log('acá estoy')
         finalizarJuego()
-        //modal finalizar juego
     }
         
     if (tiempoJS !== -1) {
@@ -375,10 +376,6 @@ const reinciarTiempo = () => {
     comenzarTiempo()
 }
 
-
-const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
-const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego')
-
 const jugarDeNuevo = () => {
     clearTimeout(reloj)
     modalGameOver.classList.add('hidden');
@@ -391,8 +388,8 @@ const reinciarJuegoEnGameOver = (frutas) => {
     crearGrillaSinMatches(frutas)
 }
 
-const finalizarJuego = () => {
-    
+const finalizarJuego = () => {  
+      
     modalGameOver.classList.remove('hidden');
     botonReiniciarEnGameOver.onclick = () => {
         reinciarJuegoEnGameOver(frutas)
