@@ -391,6 +391,15 @@ botonAyuda.onclick=()=>{
    
 }
 
+const gameOver =()=>{
+
+    modalGameOver.classList.remove('hidden');
+
+    nuevoJuegoReiniciar.onclick=()=>{
+       elegirDificultad()
+    }
+
+}
 
 // Reloj - CountDown
 const tiempoHTML = document.getElementById('tiempo-de-juego');
@@ -409,8 +418,9 @@ const comenzarTiempo = () => {
         tiempoJS--
     }
     else {
+        alert('el tiempo es 0')
         tiempoHTML.textContent = `0:00`;
-        //modal finalizar juego
+        gameOver()
     }
         
     if (tiempoJS >= 0) {
