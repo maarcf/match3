@@ -404,7 +404,6 @@ const gameOver = () => {
 const tiempoHTML = document.getElementById('tiempo-de-juego');
 const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
 const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego-reiniciar');
-console.log(botonNuevoJuegoEnGameOver)
 
 let tiempoJS = 10
 let reloj = null;
