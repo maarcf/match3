@@ -403,7 +403,8 @@ const gameOver = () => {
 // Reloj - CountDown
 const tiempoHTML = document.getElementById('tiempo-de-juego');
 const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
-const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego');
+const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego-reiniciar');
+console.log(botonNuevoJuegoEnGameOver)
 
 let tiempoJS = 10
 let reloj = null;
@@ -418,7 +419,6 @@ const comenzarTiempo = () => {
         tiempoHTML.textContent = `0:0${tiempoJS}`;
         tiempoJS--
     } else {
-        alert('el tiempo es 0')
         tiempoHTML.textContent = `0:00`;
         finalizarJuego()
     }
