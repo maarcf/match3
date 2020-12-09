@@ -1,4 +1,3 @@
-
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *         VARIABLES GLOBALES Y CONFIGURACION
@@ -28,7 +27,7 @@ const obtenerItemAlAzar = (array) => {
 
 
 const borrarGrilla = () => {
-    grillaHTML.innerHTML = ""
+    grillaHTML.innerHTML = "";
     grillaJS = [];
 }
 
@@ -161,14 +160,14 @@ const seleccionarItem = (e) => {
 
             } else {
                 console.log("no hay match, volve a tu lugar")
-                intercambiarCuadrados(primerCuadrado, e.target)
+                setTimeout(() => intercambiarCuadrados(primerCuadrado, e.target), 500)
             }
 
         } else {
             primerCuadrado.classList.remove("seleccionado")
             e.target.classList.add("seleccionado")
         }
-    } else (
+    } else(
         e.target.classList.add("seleccionado")
     )
 }
@@ -405,6 +404,8 @@ const gameOver = () => {
 
 // Reloj - CountDown
 const tiempoHTML = document.getElementById('tiempo-de-juego');
+const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
+const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego-reiniciar');
 
 let tiempoJS = 10
 let reloj = null;
@@ -415,17 +416,15 @@ const comenzarTiempo = () => {
         tiempoHTML.textContent = `0:${tiempoJS}`;
         tiempoJS--
     }
-    else if (tiempoJS <= 10 && tiempoJS >= 0) {
+    else if (tiempoJS <= 10 && tiempoJS >= 1) { 
         tiempoHTML.textContent = `0:0${tiempoJS}`;
         tiempoJS--
-    }
-    else {
-        alert('el tiempo es 0')
+    } else {
         tiempoHTML.textContent = `0:00`;
-        gameOver()
+        finalizarJuego()
     }
-
-    if (tiempoJS >= 0) {
+        
+    if (tiempoJS !== -1) {
         reloj = setTimeout(comenzarTiempo, 1000);
     }
 
@@ -435,6 +434,31 @@ const reinciarTiempo = () => {
     clearTimeout(reloj)
     tiempoJS = 30
     comenzarTiempo()
+}
+
+const jugarDeNuevo = () => {
+    clearTimeout(reloj)
+    modalGameOver.classList.add('hidden');
+    elegirDificultad()     
+}
+
+const reinciarJuegoEnGameOver = (frutas) => {
+    clearTimeout(reloj)
+    modalGameOver.classList.add('hidden');
+    crearGrillaSinMatches(frutas)
+}
+
+const finalizarJuego = () => {  
+      
+    modalGameOver.classList.remove('hidden');
+    botonReiniciarEnGameOver.onclick = () => {
+        reinciarJuegoEnGameOver(frutas)
+    }
+
+    botonNuevoJuegoEnGameOver.onclick = () => {
+        jugarDeNuevo()
+    }
+
 }
 
 
@@ -470,4 +494,3 @@ botonReiniciar.onclick = () => {
 window.onload = () => {
     iniciarModales()
 }
-
