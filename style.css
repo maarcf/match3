@@ -206,8 +206,13 @@ body {
 }
 
 
-#boton-reiniciar>i:hover{
- transform: rotate(0);
- transition: 0.2s;
+/* Animación de boton reiniciar */
+#boton-reiniciar{
+    transition: 0.3s;
+}
+
+#boton-reiniciar:hover{
+transform: rotate(180deg);
+
 }
 
