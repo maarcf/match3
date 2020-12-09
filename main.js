@@ -413,29 +413,17 @@ const comenzarTiempo = () => {
     if (tiempoJS >= 10) {
         tiempoHTML.textContent = `0:${tiempoJS}`;
         tiempoJS--
-<<<<<<< HEAD
-    } else if (tiempoJS <= 10 && tiempoJS >= 0) {
-=======
     }
     else if (tiempoJS <= 10 && tiempoJS >= 1) { 
->>>>>>> feature_tiempoDeJuego
         tiempoHTML.textContent = `0:0${tiempoJS}`;
         tiempoJS--
     } else {
         alert('el tiempo es 0')
         tiempoHTML.textContent = `0:00`;
-<<<<<<< HEAD
-        gameOver()
-    }
-
-    if (tiempoJS >= 0) {
-=======
-        console.log('acá estoy')
         finalizarJuego()
     }
         
     if (tiempoJS !== -1) {
->>>>>>> feature_tiempoDeJuego
         reloj = setTimeout(comenzarTiempo, 1000);
     }
 
