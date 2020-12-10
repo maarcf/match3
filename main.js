@@ -160,7 +160,7 @@ const seleccionarItem = (e) => {
 
             } else {
                 console.log("no hay match, volve a tu lugar")
-                setTimeout(() => intercambiarCuadrados(primerCuadrado, e.target), 500)
+                setTimeout(() => intercambiarCuadrados(primerCuadrado, e.target), 500)               
             }
 
         } else {
@@ -250,7 +250,6 @@ const reacomodarFrutas = () => {
 
 
 
-
 const buscarMatchesHorizontales = () => {
     for (let i = 0; i < grillaJS.length; i++) {
         for (let j = 0; j < grillaJS[i].length; j++) {
@@ -271,7 +270,7 @@ const buscarMatchesHorizontales = () => {
                 }
             }
         }
-    }
+    }  
 }
 
 const buscarMatchesVerticales = () => {
@@ -294,7 +293,7 @@ const buscarMatchesVerticales = () => {
                 }
             }
         }
-    }
+    }   
 }
 
 
@@ -302,6 +301,8 @@ const buscarMatches = () => {
 
     buscarMatchesHorizontales()
     buscarMatchesVerticales()
+    sumarPuntos()
+    mostrarPuntajeParcial()
 
 }
 
@@ -314,6 +315,8 @@ const crearGrillaSinMatches = (frutas) => {
     while (hayMatch() === true)
 
     reinciarTiempo()
+    reinciarPuntaje()
+    mostrarPuntajeParcial()
 }
 
 
@@ -390,15 +393,6 @@ botonAyuda.onclick = () => {
 
 }
 
-const gameOver = () => {
-
-    modalGameOver.classList.remove('hidden');
-
-    nuevoJuegoReiniciar.onclick = () => {
-        elegirDificultad()
-    }
-
-}
 
 
 
@@ -451,6 +445,7 @@ const reinciarJuegoEnGameOver = (frutas) => {
 const finalizarJuego = () => {  
       
     modalGameOver.classList.remove('hidden');
+    mostrarPuntajeFinal()
     botonReiniciarEnGameOver.onclick = () => {
         reinciarJuegoEnGameOver(frutas)
     }
@@ -462,6 +457,26 @@ const finalizarJuego = () => {
 }
 
 
+// PUNTAJE
+let puntos = 0
+const puntajeFinal = document.querySelector('#puntaje-final')
+const puntajeParcial = document.querySelector('#puntaje-parcial')
+
+const sumarPuntos = () => {
+    return puntos += 100
+}
+
+const reinciarPuntaje = () => {
+    puntos = 0
+}
+
+const mostrarPuntajeParcial = () => {
+    puntajeParcial.textContent = puntos    
+}
+
+const mostrarPuntajeFinal = () => {
+    puntajeFinal.textContent = puntos
+}
 
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
