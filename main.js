@@ -150,16 +150,16 @@ const seleccionarItem = (e) => {
 
     if (primerCuadrado != null) {
         if (sonAdyacentes(primerCuadrado, e.target)) {
-            //console.log("son adyacentes, intercambiense")
+            console.log("son adyacentes, intercambiense")
             intercambiarCuadrados(primerCuadrado, e.target)
 
             if (hayMatch()) {
-                //console.log("hay match, buscalos, borralos y reacomoda")
+                console.log("hay match, buscalos, borralos y reacomoda")
                 buscarMatches()
                 reacomodarFrutas()
 
             } else {
-                //console.log("no hay match, volve a tu lugar")
+                console.log("no hay match, volve a tu lugar")
                 setTimeout(() => intercambiarCuadrados(primerCuadrado, e.target), 500)               
             }
 
@@ -218,12 +218,12 @@ const hayCuadradosVacios = () => {
 
 const reacomodarFrutas = () => {
 
-    //console.log("reacomodando frutitas")
+    console.log("reacomodando frutitas")
 
     const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
-    //console.log(cuadradosDeGrillaHTML)
+    console.log(cuadradosDeGrillaHTML)
 
-    //console.log(hayCuadradosVacios())
+    console.log(hayCuadradosVacios())
 
     if (hayCuadradosVacios()) {
         for (let cuadrado of cuadradosDeGrillaHTML) {
@@ -233,12 +233,12 @@ const reacomodarFrutas = () => {
 
             if (cuadrado.innerHTML === "") {
 
-                //console.log("estoy rellenando espacios vacios")
+                console.log("estoy rellenando espacios vacios")
                 grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
-                //console.log(grillaJS[dataX][dataY])
+                console.log(grillaJS[dataX][dataY])
                 cuadrado.innerHTML = grillaJS[dataX][dataY]
                 cuadrado.classList.toggle("desaparecer-item")
-                //console.log(cuadrado.innerHTML)
+                console.log(cuadrado.innerHTML)
 
             }
 
@@ -303,7 +303,7 @@ const buscarMatches = () => {
     buscarMatchesVerticales()
     sumarPuntos()
     mostrarPuntajeParcial()
-    console.log('Puntos', puntos)
+
 }
 
 
