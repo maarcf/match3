@@ -396,65 +396,65 @@ botonAyuda.onclick = () => {
 
 
 
-// Reloj - CountDown
-const tiempoHTML = document.getElementById('tiempo-de-juego');
-const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
-const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego');
+// // Reloj - CountDown
+// const tiempoHTML = document.getElementById('tiempo-de-juego');
+// const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
+// const botonNuevoJuegoEnGameOver = document.querySelector('#nuevo-juego');
 
-let tiempoJS = 10
-let reloj = null;
+// let tiempoJS = 10
+// let reloj = null;
 
-const comenzarTiempo = () => {
+// const comenzarTiempo = () => {
 
-    if (tiempoJS >= 10) {
-        tiempoHTML.textContent = `0:${tiempoJS}`;
-        tiempoJS--
-    }
-    else if (tiempoJS <= 10 && tiempoJS >= 1) { 
-        tiempoHTML.textContent = `0:0${tiempoJS}`;
-        tiempoJS--
-    } else {
-        tiempoHTML.textContent = `0:00`;
-        finalizarJuego()
-    }
+//     if (tiempoJS >= 10) {
+//         tiempoHTML.textContent = `0:${tiempoJS}`;
+//         tiempoJS--
+//     }
+//     else if (tiempoJS <= 10 && tiempoJS >= 1) { 
+//         tiempoHTML.textContent = `0:0${tiempoJS}`;
+//         tiempoJS--
+//     } else {
+//         tiempoHTML.textContent = `0:00`;
+//         finalizarJuego()
+//     }
         
-    if (tiempoJS !== -1) {
-        reloj = setTimeout(comenzarTiempo, 1000);
-    }
+//     if (tiempoJS !== -1) {
+//         reloj = setTimeout(comenzarTiempo, 1000);
+//     }
 
-}
+// }
 
-const reinciarTiempo = () => {
-    clearTimeout(reloj)
-    tiempoJS = 30
-    comenzarTiempo()
-}
+// const reinciarTiempo = () => {
+//     clearTimeout(reloj)
+//     tiempoJS = 30
+//     comenzarTiempo()
+// }
 
-const jugarDeNuevo = () => {
-    clearTimeout(reloj)
-    modalGameOver.classList.add('hidden');
-    elegirDificultad()     
-}
+// const jugarDeNuevo = () => {
+//     clearTimeout(reloj)
+//     modalGameOver.classList.add('hidden');
+//     elegirDificultad()     
+// }
 
-const reinciarJuegoEnGameOver = (frutas) => {
-    clearTimeout(reloj)
-    modalGameOver.classList.add('hidden');
-    crearGrillaSinMatches(frutas)
-}
+// const reinciarJuegoEnGameOver = (frutas) => {
+//     clearTimeout(reloj)
+//     modalGameOver.classList.add('hidden');
+//     crearGrillaSinMatches(frutas)
+// }
 
-const finalizarJuego = () => {  
+// const finalizarJuego = () => {  
       
-    modalGameOver.classList.remove('hidden');
-    mostrarPuntajeFinal()
-    botonReiniciarEnGameOver.onclick = () => {
-        reinciarJuegoEnGameOver(frutas)
-    }
+//     modalGameOver.classList.remove('hidden');
+//     mostrarPuntajeFinal()
+//     botonReiniciarEnGameOver.onclick = () => {
+//         reinciarJuegoEnGameOver(frutas)
+//     }
 
-    botonNuevoJuegoEnGameOver.onclick = () => {
-        jugarDeNuevo()
-    }
+//     botonNuevoJuegoEnGameOver.onclick = () => {
+//         jugarDeNuevo()
+//     }
 
-}
+// }
 
 
 // PUNTAJE

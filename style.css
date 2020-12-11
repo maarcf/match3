@@ -216,3 +216,35 @@ transform: rotate(180deg);
 
 }
 
+
+/* MEDIA QUERY */
+
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+
+.contenedor-general{
+    width: 300px;
+}
+
+.controles{
+    width: 290px;
+    font-size: 15px;
+}
+
+  
+.contenedor-grilla{
+    width: 290px;
+    height: 290px;
+}
+
+
+/* .item{
+    width: 32px;
+    height: 32px;
+} */
+
+.modal{
+    width: 270px;
+}
+
+}
