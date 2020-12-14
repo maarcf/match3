@@ -30,12 +30,10 @@ const ajustarGrilla = () => {
 
 let anchoDeGrilla = ajustarGrilla();
 
-console.log(ajustarGrilla())
+
 
 let dificultad = ""
 let grillaJS = [];
-
-
 
 const obtenerNumeroAlAzar = (array) => {
     return Math.floor((Math.random() * array.length))
@@ -79,9 +77,12 @@ const creargrillaJS = (columnas, array) => {
 }
 
 const dibujarGrillaHTML = () => {
+    // Vacio la grilla para el responsive
+    grillaHTML.innerHTML = ''
+
     for (let i = 0; i < grillaJS.length; i++) {
         for (let j = 0; j < grillaJS[i].length; j++) {
-            const cuadrado = generarCuadrado(j, i)
+            let cuadrado = generarCuadrado(j, i)
             grillaHTML.appendChild(cuadrado)
 
         }
@@ -334,7 +335,7 @@ const crearGrillaSinMatches = (frutas) => {
     }
     while (hayMatch() === true)
 
-    reinciarTiempo()
+//    reinciarTiempo()
     reinciarPuntaje()
     mostrarPuntajeParcial()
 }
@@ -415,7 +416,7 @@ botonAyuda.onclick = () => {
 
 
 
-
+// Male: dejamos comentada la función del tiempo para que no moleste.
 // // Reloj - CountDown
 // const tiempoHTML = document.getElementById('tiempo-de-juego');
 // const botonReiniciarEnGameOver = document.querySelector('#reiniciar');
@@ -528,4 +529,13 @@ botonReiniciar.onclick = () => {
 
 window.onload = () => {
     iniciarModales()
+}
+
+window.onresize = e => {
+    if (e.isTrusted) {
+        anchoDeGrilla = ajustarGrilla();
+        dibujarAnchoDeGrilla();
+        redimensionarAnchoDeDiv();
+        dibujarGrillaHTML();
+    }
 }

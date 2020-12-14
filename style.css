@@ -212,6 +212,10 @@ transform: rotate(180deg);
         width: 290px;
         font-size: 15px;
     }
+
+    .control-puntaje {
+        width: 55%;
+    }
     
     .contenedor-grilla{
         width: 290px;
@@ -240,6 +244,10 @@ transform: rotate(180deg);
 .controles{
     width: 270px;
     font-size: 15px;
+}
+
+.control-puntaje {
+    width: 55%;
 }
 
 .contenedor-grilla{
