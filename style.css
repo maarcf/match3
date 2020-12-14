@@ -121,23 +121,6 @@ body {
     justify-content: space-between;
 }
 
-.frutas-dificil {
-    font-size: 40px;
-    text-align: center;
-    align-items: center;
-}
-
-.frutas-mediana {
-    font-size: 35px;
-    text-align: center;
-    align-items: center;
-}
-
-.frutas-facil {
-    font-size: 30px;
-    text-align: center;
-    align-items: center;
-}
 
 .seleccionado {
     border: 1px solid #ffffff;
@@ -229,6 +212,10 @@ transform: rotate(180deg);
         width: 290px;
         font-size: 15px;
     }
+
+    .control-puntaje {
+        width: 55%;
+    }
     
     .contenedor-grilla{
         width: 290px;
@@ -237,21 +224,9 @@ transform: rotate(180deg);
     
     
     .item{
-        width: 32px;
-        height: 32px;
+        font-size: 24px;
     }
-    
-    .frutas-dificil {
-        font-size: 30px;
-    }
-    
-    .frutas-mediana {
-        font-size: 25px;
-    }
-    
-    .frutas-facil {
-        font-size: 20px;
-    }
+       
 
     .modal{
         width: 270px;
@@ -262,42 +237,32 @@ transform: rotate(180deg);
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
 
-.contenedor-general{
-    width: 300px;
-}
+    .contenedor-general{
+        width: 300px;
+    }
 
-.controles{
-    width: 270px;
-    font-size: 15px;
-}
+    .controles{
+        width: 270px;
+        font-size: 15px;
+    }
 
-.contenedor-grilla{
-    width: 270px;
-    height: 270px;
-}
+    .control-puntaje {
+        width: 55%;
+    }
+
+    .contenedor-grilla{
+        width: 270px;
+        height: 270px;
+    }
 
 
-.item{
-    width: 30px;
-    height: 30px;
-}
+    .item{
+        font-size: 20px;
+    }
 
-.frutas-dificil {
-    font-size: 25px;
-}
 
-.frutas-mediana {
-    font-size: 25px;
-}
-
-.frutas-facil {
-    font-size: 20px;
-}
-
-.modal{
-    width: 270px;
-}
+    .modal{
+        width: 270px;
+    }
 
 }
-
-
