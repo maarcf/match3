@@ -216,8 +216,8 @@ const seleccionarItem = (e) => {
 
             if (hayMatch()) {
                 console.log("hay match, buscalos, borralos y reacomoda")
-                setTimeout(() => buscarMatches(), 500)
-                setTimeout(() => bajarTodoUnBloque(), 3000)
+                setTimeout(() => buscarMatches(), 500)//busca y borra matches
+                setTimeout(() => reacomodarFrutitas(), 3000)
                
             } else {
                 console.log("no hay match, volve a tu lugar")
@@ -327,52 +327,35 @@ const obtenerCantidadEspaciosDebajo = (x, y) => {
     return espacios
 }
 
-const rellenarEspaciosRestantes = () => {  
-    for (let i = 0; i < grillaJS.length; i++) {
-        for (let j = 0; j < grillaJS[i].length; j++) {
-        if (grillaJS[i][j] === null) {
-            grillaJS[i][j] = obtenerItemAlAzar(frutas)
-        }
-        }
-    }
-}
 
-const chequearSiHayAlgoQueAcomodar = () => {
 
+
+const reacomodarFrutitas = () => {
+
+    console.log("bajando frutitas en bloque")
+
+    // Buscar el primer cuadrado vacio
     let cuadradoVacio = buscarCuadradoVacio()
     console.log(cuadradoVacio)
 
+    // Bajar el cuadrado que este arriba del primer cuadrado vacio
     if(cuadradoVacio){
+        console.log("Intentando bajar cuadrado o llenarlo")
         const dataX = Number(cuadradoVacio.dataset.x)
         const dataY = Number(cuadradoVacio.dataset.y)
 
         let cuadradoArribaDeCuadradoVacio = obtenerCuadrado((dataX-1), dataY)
         console.log(cuadradoArribaDeCuadradoVacio)
 
-        if(cuadradoArribaDeCuadradoVacio){
-            return cuadradoArribaDeCuadradoVacio
-        }
-    
-    }
-    return false
-    
-}
-
-const bajarTodoUnBloque = () => {
-    console.log("bajando frutitas en bloque")
-    
-    let cuadradoParaBajar = chequearSiHayAlgoQueAcomodar()
-    console.log(cuadradoParaBajar)
-
-    while (cuadradoParaBajar) { // mientras haya un cuadrado que se pueda bajar
-        const dataX2 = Number(cuadradoParaBajar.dataset.x)
-        const dataY2 = Number(cuadradoParaBajar.dataset.y)
-
-        const espaciosVacios = obtenerCantidadEspaciosDebajo(dataX2, dataY2)
-        bajarCuadrado(cuadradoParaBajar, espaciosVacios)        
-    }
-
-    setTimeout(rellenarEspaciosRestantes, 6000)
+         if(cuadradoArribaDeCuadradoVacio) { // si hay un cuadrado arriba
+            const dataX2 = Number(cuadradoArribaDeCuadradoVacio.dataset.x)
+            const dataY2 = Number(cuadradoArribaDeCuadradoVacio.dataset.y)
+            const espaciosVacios = obtenerCantidadEspaciosDebajo(dataX2, dataY2)
+            bajarCuadrado(cuadradoArribaDeCuadradoVacio, espaciosVacios)        
+         }else { // si no hay cuadrado arriba- rellena con fruta al azar
+            grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
+         }     
+   }
 }
 
 const buscarMatches = () => {
