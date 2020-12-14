@@ -216,8 +216,8 @@ const seleccionarItem = (e) => {
 
             if (hayMatch()) {
                 console.log("hay match, buscalos, borralos y reacomoda")
-                setTimeout(() => buscarMatches(), 500)//busca y borra matches
-                setTimeout(() => reacomodarFrutitas(), 3000)
+                setTimeout(() => buscarMatches2(), 500)//busca y borra matches
+                //setTimeout(() => reacomodarFrutitas(), 3000)
                
             } else {
                 console.log("no hay match, volve a tu lugar")
@@ -241,10 +241,16 @@ const seleccionarItem = (e) => {
  */
 
 const borrarMatches = (matches) => {
-    for (let div of matches) {
-        const datax = div.dataset.x
-        const datay = div.dataset.y
-        grillaJS[datax][datay] = null
+
+    // recorrer JS
+    for (let i = 0; i < matches.length; i++) {
+          grillaJS[i] = null
+    }
+
+    //recorrer el HTML
+    const matchesHTML = document.querySelectorAll(".is-match")
+
+    for (let div of matchesHTML) {          
         div.innerHTML = ""
         div.classList.add('desaparecer-item')
         
@@ -298,10 +304,74 @@ const buscarMatchesVerticales = () => {
     }   
 }
 
+// Buscar matches mas de tres
+
+const buscarMatches2 = () => {
+
+
+    const arrayFilas = []
+    const arrayColumnas = []
+    const todosLosDivs = document.querySelectorAll(".grilla > div")
+    
+    for (let i = 0; i < grillaJS.length; i++) {
+        for (let j = 0; j < grillaJS[i].length; j++) {
+
+            if (grillaJS[i][j] === grillaJS[i][j + 1] && grillaJS[i][j] === grillaJS[i][j + 2]) {
+               // console.log(grillaJS[i][j], grillaJS[i][j + 1], grillaJS[i][j + 2])
+                
+                arrayFilas.push(grillaJS[i][j], grillaJS[i][j + 1], grillaJS[i][j + 2])
+                console.log(arrayFilas)
+
+                for (let div of todosLosDivs) {
+
+                    if (div.dataset.x === `${i}` && div.dataset.y === `${j}`) {
+                        div.classList.add('is-match')
+                    }
+                    if (div.dataset.x === `${i}` && div.dataset.y === `${j + 1}`) {
+                        div.classList.add('is-match')
+                    }
+                    if (div.dataset.x === `${i}` && div.dataset.y === `${j + 2}`) {
+                        div.classList.add('is-match')
+                    }
+                }
+
+            }
+
+        }
+    }
+    borrarMatches(arrayFilas)
+    console.log("termino el primer for ")
+    for (let i = 0; i < grillaJS.length; i++) {
+        console.log("dentro del segundo for ", grillaJS)
+        for (let j = 0; j < grillaJS[i].length; j++) {
+            
+            if (grillaJS[i + 1] && grillaJS[i + 2] && grillaJS[i][j] === grillaJS[i + 1][j] && grillaJS[i + 2][j] === grillaJS[i][j]) {
+                //console.log(grillaJS[i][j], grillaJS[i + 1][j], grillaJS[i + 2][j])
+                arrayColumnas.push(grillaJS[i][j], grillaJS[i + 1][j], grillaJS[i + 2][j])
+                console.log(arrayColumnas)
+
+                for (let div of todosLosDivs) {
+                    if (div.dataset.x === `${i}` && div.dataset.y === `${j}`) {
+                        div.classList.add('is-match')
+                    }
+                    if (div.dataset.x === `${i + 1}` && div.dataset.y === `${j}`) {
+                        div.classList.add('is-match')
+                    }
+                    if (div.dataset.x === `${i + 2}` && div.dataset.y === `${j}`) {
+                        div.classList.add('is-match')
+                    }
+                }
+            }
+
+        }
+
+    }
+    borrarMatches(arrayColumnas)
+}
 /**-------------------------------------------------------------------- */
 
 
-const bajarCuadrado = (cuadrado, espacios = 1) => {
+const bajarCuadrado = (cuadrado) => {
     const datax = Number(cuadrado.dataset.x)
     const datay = Number(cuadrado.dataset.y)
   
@@ -310,8 +380,9 @@ const bajarCuadrado = (cuadrado, espacios = 1) => {
     grillaJS[datax][datay] = null // el de arriba queda null
   
    // modifica grillahtml-- posicion y dataset
-    cuadrado.style.top = `${(datax + espacios) * anchoDeDiv}px`
-    cuadrado.dataset.x = datax + espacios  
+    cuadrado.style.top = `${(datax + 1) * anchoDeDiv}px`
+    cuadrado.dataset.x = datax + 1  
+    cuadrado.innerHTML = ""
   }
 
 
@@ -346,14 +417,16 @@ const reacomodarFrutitas = () => {
 
         let cuadradoArribaDeCuadradoVacio = obtenerCuadrado((dataX-1), dataY)
         console.log(cuadradoArribaDeCuadradoVacio)
-
+       
          if(cuadradoArribaDeCuadradoVacio) { // si hay un cuadrado arriba
-            const dataX2 = Number(cuadradoArribaDeCuadradoVacio.dataset.x)
-            const dataY2 = Number(cuadradoArribaDeCuadradoVacio.dataset.y)
-            const espaciosVacios = obtenerCantidadEspaciosDebajo(dataX2, dataY2)
-            bajarCuadrado(cuadradoArribaDeCuadradoVacio, espaciosVacios)        
+            //const dataX2 = Number(cuadradoArribaDeCuadradoVacio.dataset.x)
+            //const dataY2 = Number(cuadradoArribaDeCuadradoVacio.dataset.y)
+
+            //const espaciosVacios = obtenerCantidadEspaciosDebajo(dataX2, dataY2)
+            setTimeout(() => bajarCuadrado(cuadradoArribaDeCuadradoVacio), 2000)        
          }else { // si no hay cuadrado arriba- rellena con fruta al azar
-            grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
+           grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
+           cuadradoVacio.innerHTML = grillaJS[dataX][dataY]
          }     
    }
 }
@@ -361,6 +434,7 @@ const reacomodarFrutitas = () => {
 const buscarMatches = () => {
     buscarMatchesHorizontales()
     buscarMatchesVerticales()
+    reacomodarFrutitas()
     sumarPuntos()
     mostrarPuntajeParcial()
 }
