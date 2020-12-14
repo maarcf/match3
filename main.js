@@ -529,11 +529,9 @@ window.onload = () => {
     iniciarModales()
 }
 
-window.onresize = e => {
-    if (e.isTrusted) {
-        anchoDeGrilla = ajustarGrilla();
-        dibujarAnchoDeGrilla();
-        redimensionarAnchoDeDiv();
-        dibujarGrillaHTML();
-    }
+window.onresize = () => {
+    anchoDeGrilla = ajustarGrilla();
+    dibujarAnchoDeGrilla();
+    redimensionarAnchoDeDiv();
+    dibujarGrillaHTML();    
 }
