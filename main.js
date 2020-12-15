@@ -174,8 +174,7 @@ const seleccionarItem = (e) => {
 
             if (hayMatch()) {
                 console.log("hay match, buscalos, borralos y reacomoda")        
-                    setTimeout(() => buscarMatches(), 1000)//busca y borra matches
-                   // setTimeout(() => reacomodarFrutas(), 2000) 
+                    buscarMatches()//busca y borra matches
 
             } else {
                 console.log("no hay match, volve a tu lugar")
@@ -199,6 +198,7 @@ const seleccionarItem = (e) => {
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  */
 
+ /*
 
 const borrarMatches = (matches) => {
     for (let div of matches) {
@@ -213,6 +213,32 @@ const borrarMatches = (matches) => {
         div.classList.add('desaparecer-item')
     }
 }
+*/
+
+const borrarMatches = () => {
+
+    const matches = document.querySelectorAll(".is-match")
+    console.log(matches)
+
+    for (let div of matches) {
+        //borrar grillaJS
+        const datax = Number(div.dataset.x)
+        const datay = Number(div.dataset.y)  
+
+        grillaJS[datax][datay] = null
+       
+        // borrar grillaHTML
+        div.innerHTML = ""
+        div.classList.add('desaparecer-item')
+    }
+    
+    // resetear los div que hicieron matches
+    for(let div of matches){
+        div.classList.remove("is-match")
+    }
+
+}
+
 
 const hayMatch = () => {
     for (let i = 0; i < grillaJS.length; i++) {
@@ -269,16 +295,15 @@ const reacomodarFrutas = () => {
             }
 
         }
-
     }
 
     if(hayMatch()){
-       setTimeout(() => buscarMatches(), 1500) 
+       setTimeout(() => buscarMatches(), 1000) 
     }
 
 }
 
-
+/*
 
 const buscarMatchesHorizontales = () => {
     for (let i = 0; i < grillaJS.length; i++) {
@@ -325,13 +350,69 @@ const buscarMatchesVerticales = () => {
         }
     }   
 }
+*/
+const buscarYborrarMatches = () => {
+    console.log("estas en buscar y borrar matches")
+ 
+   const todosLosDivs = document.querySelectorAll(".grilla > div")
+ 
+   // busca matches horizontales
+   for (let i = 0; i < grillaJS.length; i++) {
+       for (let j = 0; j < grillaJS[i].length; j++) {
 
+           if (grillaJS[i][j] === grillaJS[i][j + 1] && grillaJS[i][j] === grillaJS[i][j + 2]) {            
+
+               for (let div of todosLosDivs) {
+
+                   if (div.dataset.x === `${i}` && div.dataset.y === `${j}`) {
+                       div.classList.add('is-match')
+                   }
+                   if (div.dataset.x === `${i}` && div.dataset.y === `${j + 1}`) {
+                       div.classList.add('is-match')
+                   }
+                   if (div.dataset.x === `${i}` && div.dataset.y === `${j + 2}`) {
+                       div.classList.add('is-match')
+                   }
+               }
+
+           }
+       }
+   }
+   
+   //busca matches verticales
+   for (let i = 0; i < grillaJS.length; i++) {
+     
+       for (let j = 0; j < grillaJS[i].length; j++) {
+           
+           if (grillaJS[i + 1] && grillaJS[i + 2] && grillaJS[i][j] === grillaJS[i + 1][j] && grillaJS[i + 2][j] === grillaJS[i][j]) {
+               
+
+               for (let div of todosLosDivs) {
+                   if (div.dataset.x === `${i}` && div.dataset.y === `${j}`) {
+                       div.classList.add('is-match')
+                   }
+                   if (div.dataset.x === `${i + 1}` && div.dataset.y === `${j}`) {
+                       div.classList.add('is-match')
+                   }
+                   if (div.dataset.x === `${i + 2}` && div.dataset.y === `${j}`) {
+                       div.classList.add('is-match')
+                   }
+               }
+           }
+
+       }
+   }
+  
+setTimeout(() => borrarMatches(),1000)
+   
+}
 
 const buscarMatches = () => {
 
-    buscarMatchesHorizontales()
-    buscarMatchesVerticales()
-    setTimeout(() => reacomodarFrutas(), 1000) 
+  //  buscarMatchesHorizontales()
+  //  buscarMatchesVerticales()
+    buscarYborrarMatches()
+    setTimeout(() => reacomodarFrutas(),1500) 
     sumarPuntos()
     mostrarPuntajeParcial()
 
