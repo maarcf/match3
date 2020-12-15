@@ -173,9 +173,9 @@ const seleccionarItem = (e) => {
             intercambiarCuadrados(primerCuadrado, e.target)
 
             if (hayMatch()) {
-                console.log("hay match, buscalos, borralos y reacomoda")
-                buscarMatches()
-                reacomodarFrutas()
+                console.log("hay match, buscalos, borralos y reacomoda")        
+                    setTimeout(() => buscarMatches(), 1000)//busca y borra matches
+                   // setTimeout(() => reacomodarFrutas(), 2000) 
 
             } else {
                 console.log("no hay match, volve a tu lugar")
@@ -192,7 +192,7 @@ const seleccionarItem = (e) => {
 }
 
 
-
+/**   INICIA FUNCIONALIDAD REACOMODAR FRUTITAS */
 /**
  * ～*～♡～*～♥～*～♡～*～♥～*～♡～*～♥～*～♡～*～
  *              BUSCAR y BORRAR MATCHES
@@ -202,6 +202,13 @@ const seleccionarItem = (e) => {
 
 const borrarMatches = (matches) => {
     for (let div of matches) {
+        //borrar grillaJS
+        const datax = Number(div.dataset.x)
+        const datay = Number(div.dataset.y)  
+
+        grillaJS[datax][datay] = null
+       
+        // borrar grillaHTML
         div.innerHTML = ""
         div.classList.add('desaparecer-item')
     }
@@ -265,6 +272,10 @@ const reacomodarFrutas = () => {
 
     }
 
+    if(hayMatch()){
+       setTimeout(() => buscarMatches(), 1500) 
+    }
+
 }
 
 
@@ -320,6 +331,7 @@ const buscarMatches = () => {
 
     buscarMatchesHorizontales()
     buscarMatchesVerticales()
+    setTimeout(() => reacomodarFrutas(), 1000) 
     sumarPuntos()
     mostrarPuntajeParcial()
 
