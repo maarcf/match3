@@ -169,15 +169,15 @@ const seleccionarItem = (e) => {
 
     if (primerCuadrado != null) {
         if (sonAdyacentes(primerCuadrado, e.target)) {
-            console.log("son adyacentes, intercambiense")
+            //console.log("son adyacentes, intercambiense")
             intercambiarCuadrados(primerCuadrado, e.target)
 
             if (hayMatch()) {
-                console.log("hay match, buscalos, borralos y reacomoda")        
+                //console.log("hay match, buscalos, borralos y reacomoda")        
                     buscarMatches()//busca y borra matches
 
             } else {
-                console.log("no hay match, volve a tu lugar")
+                //console.log("no hay match, volve a tu lugar")
                 setTimeout(() => intercambiarCuadrados(primerCuadrado, e.target), 500)               
             }
 
@@ -218,7 +218,7 @@ const borrarMatches = (matches) => {
 const borrarMatches = () => {
 
     const matches = document.querySelectorAll(".is-match")
-    console.log(matches)
+    //console.log(matches)
 
     for (let div of matches) {
         //borrar grillaJS
@@ -233,10 +233,11 @@ const borrarMatches = () => {
     }
     
     // resetear los div que hicieron matches
-    for(let div of matches){
+    for (let div of matches){
         div.classList.remove("is-match")
     }
 
+    
 }
 
 
@@ -270,12 +271,12 @@ const hayCuadradosVacios = () => {
 
 const reacomodarFrutas = () => {
 
-    console.log("reacomodando frutitas")
+    //console.log("reacomodando frutitas")
 
     const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
-    console.log(cuadradosDeGrillaHTML)
+    //console.log(cuadradosDeGrillaHTML)
 
-    console.log(hayCuadradosVacios())
+    //console.log(hayCuadradosVacios())
 
     if (hayCuadradosVacios()) {
         for (let cuadrado of cuadradosDeGrillaHTML) {
@@ -285,20 +286,26 @@ const reacomodarFrutas = () => {
 
             if (cuadrado.innerHTML === "") {
 
-                console.log("estoy rellenando espacios vacios")
+                //console.log("estoy rellenando espacios vacios")
                 grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
-                console.log(grillaJS[dataX][dataY])
+                //console.log(grillaJS[dataX][dataY])
                 cuadrado.innerHTML = grillaJS[dataX][dataY]
                 cuadrado.classList.toggle("desaparecer-item")
-                console.log(cuadrado.innerHTML)
+                //console.log(cuadrado.innerHTML)
 
             }
 
         }
     }
 
-    if(hayMatch()){
-       setTimeout(() => buscarMatches(), 1000) 
+    if (hayMatch()){
+        combo++
+        mostrarCombo()
+        setTimeout(() => buscarMatches(), 1000) 
+    }
+    else {
+        combo = 1
+        mostrarCombo()
     }
 
 }
@@ -352,7 +359,7 @@ const buscarMatchesVerticales = () => {
 }
 */
 const buscarYborrarMatches = () => {
-    console.log("estas en buscar y borrar matches")
+    //console.log("estas en buscar y borrar matches")
  
    const todosLosDivs = document.querySelectorAll(".grilla > div")
  
@@ -571,11 +578,16 @@ botonAyuda.onclick = () => {
 
 // PUNTAJE
 let puntos = 0
+let combo = 1
 const puntajeFinal = document.querySelector('#puntaje-final')
 const puntajeParcial = document.querySelector('#puntaje-parcial')
+const comboHTML = document.querySelector('#combo')
 
 const sumarPuntos = () => {
-    return puntos += 100
+    const matches = document.querySelectorAll(".is-match")
+    let sumItem = 100 * matches.length
+    sumItem = sumItem * combo  
+    return puntos += sumItem
 }
 
 const reinciarPuntaje = () => {
@@ -588,6 +600,10 @@ const mostrarPuntajeParcial = () => {
 
 const mostrarPuntajeFinal = () => {
     puntajeFinal.textContent = puntos
+}
+
+const mostrarCombo = () => {
+    comboHTML.textContent = `x${combo}`
 }
 
 /**
