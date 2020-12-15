@@ -45,11 +45,14 @@ body {
 }
 
 .control-puntaje {
-    width: 50%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-left: 10px;
+}
+
+.control-puntaje > p:first-child {
+    margin-right: 10px;
 }
 
 .botones-control {
@@ -212,10 +215,6 @@ transform: rotate(180deg);
         width: 290px;
         font-size: 15px;
     }
-
-    .control-puntaje {
-        width: 55%;
-    }
     
     .contenedor-grilla{
         width: 290px;
@@ -244,10 +243,6 @@ transform: rotate(180deg);
     .controles{
         width: 270px;
         font-size: 15px;
-    }
-
-    .control-puntaje {
-        width: 55%;
     }
 
     .contenedor-grilla{
