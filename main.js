@@ -207,6 +207,7 @@ const sonAdyacentes = (elem1, elem2) => {
 
 
 const seleccionarItem = (e) => {
+    console.log("hiciste click en el cuadrado y entraste a seleccionar item")
     let primerCuadrado = document.querySelector(".seleccionado")
 
     if (primerCuadrado != null) {
@@ -216,7 +217,7 @@ const seleccionarItem = (e) => {
 
             if (hayMatch()) {
                 console.log("hay match, buscalos, borralos y reacomoda")
-                setTimeout(() => buscarMatches2(), 500)//busca y borra matches
+                setTimeout(() => buscarMatches(), 500)//busca y borra matches
                 //setTimeout(() => reacomodarFrutitas(), 3000)
                
             } else {
@@ -242,22 +243,28 @@ const seleccionarItem = (e) => {
 
 const borrarMatches = (matches) => {
 
-    // recorrer JS
-    for (let i = 0; i < matches.length; i++) {
-          grillaJS[i] = null
-    }
+    console.log("estas borrando los matches encontrados")
+    
+    
 
     //recorrer el HTML
     const matchesHTML = document.querySelectorAll(".is-match")
 
-    for (let div of matchesHTML) {          
+
+    for (let div of matchesHTML) {  
+        const datax = Number(div.dataset.x)
+        const datay = Number(div.dataset.y)  
+
+        grillaJS[datax][datay] = null
         div.innerHTML = ""
         div.classList.add('desaparecer-item')
         
     }
+
+     console.log(grillaJS)
 }
 
-
+/*
 const buscarMatchesHorizontales = () => {
     for (let i = 0; i < grillaJS.length; i++) {
         for (let j = 0; j < grillaJS[i].length; j++) {
@@ -303,24 +310,21 @@ const buscarMatchesVerticales = () => {
         }
     }   
 }
-
+*/
 // Buscar matches mas de tres
 
-const buscarMatches2 = () => {
+const buscarYborrarMatches = () => {
+     console.log("estas en busacr y borrar matches")
 
-
-    const arrayFilas = []
-    const arrayColumnas = []
+   
     const todosLosDivs = document.querySelectorAll(".grilla > div")
     
     for (let i = 0; i < grillaJS.length; i++) {
         for (let j = 0; j < grillaJS[i].length; j++) {
 
             if (grillaJS[i][j] === grillaJS[i][j + 1] && grillaJS[i][j] === grillaJS[i][j + 2]) {
-               // console.log(grillaJS[i][j], grillaJS[i][j + 1], grillaJS[i][j + 2])
-                
-                arrayFilas.push(grillaJS[i][j], grillaJS[i][j + 1], grillaJS[i][j + 2])
-                console.log(arrayFilas)
+              
+               
 
                 for (let div of todosLosDivs) {
 
@@ -339,16 +343,15 @@ const buscarMatches2 = () => {
 
         }
     }
-    borrarMatches(arrayFilas)
-    console.log("termino el primer for ")
+    
+
+
     for (let i = 0; i < grillaJS.length; i++) {
-        console.log("dentro del segundo for ", grillaJS)
+      
         for (let j = 0; j < grillaJS[i].length; j++) {
             
             if (grillaJS[i + 1] && grillaJS[i + 2] && grillaJS[i][j] === grillaJS[i + 1][j] && grillaJS[i + 2][j] === grillaJS[i][j]) {
-                //console.log(grillaJS[i][j], grillaJS[i + 1][j], grillaJS[i + 2][j])
-                arrayColumnas.push(grillaJS[i][j], grillaJS[i + 1][j], grillaJS[i + 2][j])
-                console.log(arrayColumnas)
+                
 
                 for (let div of todosLosDivs) {
                     if (div.dataset.x === `${i}` && div.dataset.y === `${j}`) {
@@ -366,7 +369,9 @@ const buscarMatches2 = () => {
         }
 
     }
-    borrarMatches(arrayColumnas)
+   
+ borrarMatches()
+    
 }
 /**-------------------------------------------------------------------- */
 
@@ -432,9 +437,10 @@ const reacomodarFrutitas = () => {
 }
 
 const buscarMatches = () => {
-    buscarMatchesHorizontales()
-    buscarMatchesVerticales()
-    reacomodarFrutitas()
+    console.log("estas en buscar Matches")
+    //buscarMatchesHorizontales()
+    //buscarMatchesVerticales()
+    buscarYborrarMatches()
     sumarPuntos()
     mostrarPuntajeParcial()
 }
