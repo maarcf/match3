@@ -48,7 +48,7 @@ const borrarGrilla = () => {
 }
 
 const obtenerCuadrado = (x, y) => {
-    return document.querySelector(`.cuadrado[data-x="${x}"][data-y="${y}"]`)
+    return document.querySelector(`.item[data-x="${x}"][data-y="${y}"]`)
 }
 
 /**
@@ -258,6 +258,7 @@ const hayMatch = () => {
     return false
 }
 
+
 const hayCuadradosVacios = () => {
 
     const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
@@ -269,6 +270,7 @@ const hayCuadradosVacios = () => {
     }
 }
 
+/*
 const reacomodarFrutas = () => {
 
     //console.log("reacomodando frutitas")
@@ -308,56 +310,84 @@ const reacomodarFrutas = () => {
         mostrarCombo()
     }
 
+}*/
+
+const bajarCuadrado = (cuadrado) => {
+
+    console.log(`estas bajando el cuadrado: ${cuadrado}`)
+    const datax = Number(cuadrado.dataset.x)
+    const datay = Number(cuadrado.dataset.y)
+  
+    //modifica grillaJS
+    grillaJS[datax+1][datay] = grillaJS[datax][datay]  // el de arriba de lo enchufa al cuadrado de abajo
+    grillaJS[datax][datay] = null // el de arriba queda null
+  
+   // modifica grillahtml-- posicion y dataset
+    cuadrado.style.top = `${(datax + 1) * anchoDeDiv}px`
+    cuadrado.dataset.x = datax + 1  
+    //cuadrado.innerHTML = ""
 }
 
-/*
 
-const buscarMatchesHorizontales = () => {
-    for (let i = 0; i < grillaJS.length; i++) {
-        for (let j = 0; j < grillaJS[i].length; j++) {
+const buscarCuadradoVacio = () => {
+    console.log("estas en la fc buscarCuadradoVacio")
+    const cuadradosDeGrillaHTML = document.querySelectorAll(".grilla > div");
 
-            if (grillaJS[i][j + 1]) {
-                if (grillaJS[i][j + 2]) {
-                    const div1 = document.querySelector(`div[data-x = '${i}'][data-y = '${j}']`)
-                    const div2 = document.querySelector(`div[data-x = '${i}'][data-y = '${j + 1}']`)
-                    const div3 = document.querySelector(`div[data-x = '${i}'][data-y = '${j + 2}']`)
-
-                    const match3 = [div1, div2, div3]
-
-                    for (let div of match3) {
-                        if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            borrarMatches(match3)
-                        }
-                    }
-                }
-            }
+    for (let cuadrado of cuadradosDeGrillaHTML) {
+        if (cuadrado.innerHTML === "") {
+            return cuadrado
         }
-    }  
+    }
 }
 
-const buscarMatchesVerticales = () => {
-    for (let i = 0; i < grillaJS.length; i++) {
+const reacomodarFrutas = () => {
 
-        for (let j = 0; j < grillaJS[i].length; j++) {
-            if (grillaJS[i + 1]) {
-                if (grillaJS[i + 2]) {
-                    const div1 = document.querySelector(`div[data-x = '${i}'][data-y = '${j}']`)
-                    const div2 = document.querySelector(`div[data-x = '${i + 1}'][data-y = '${j}']`)
-                    const div3 = document.querySelector(`div[data-x = '${i + 2}'][data-y = '${j}']`)
+    console.log("estas reacomodando las frutitas en bloque")
 
-                    const match3 = [div1, div2, div3]
+    // Buscar el primer cuadrado vacio
+    let cuadradoVacio = buscarCuadradoVacio()
+    console.log(` El primer cuadrado vacio es ${Object.values(cuadradoVacio)}`)
 
-                    for (let div of match3) {
-                        if (div1.textContent === div2.textContent && div2.textContent === div3.textContent) {
-                            borrarMatches(match3)
-                        }
-                    }
-                }
-            }
+    // Bajar el cuadrado que este arriba del primer cuadrado vacio
+
+    for (let index = 0; index < 20; index++) {
+        if(cuadradoVacio){
+            const dataX = Number(cuadradoVacio.dataset.x)
+            const dataY = Number(cuadradoVacio.dataset.y)
+    
+            let cuadradoArribaDeCuadradoVacio = obtenerCuadrado((dataX-1), dataY)
+            console.log(`El cuadrado de arriba es: ${Object.values(cuadradoArribaDeCuadradoVacio)}`)
+           
+             if(cuadradoArribaDeCuadradoVacio) { // si hay un cuadrado arriba
+                console.log("Hay un cuadrado arriba del vacio")
+                setTimeout(() => bajarCuadrado(cuadradoArribaDeCuadradoVacio), 1000)    
+    
+             }else { // si no hay cuadrado arriba- rellena con fruta al azar
+               console.log("No hay un cuadrado arriba del vacio")
+               grillaJS[dataX][dataY] = obtenerItemAlAzar(frutas)
+               cuadradoVacio.innerHTML = grillaJS[dataX][dataY]
+             }  
+             
+             cuadradoVacio = buscarCuadradoVacio()
+             console.log(`Ahora el primer cuadrado vacio es: ${Object.values(cuadradoVacio)}`)
         }
-    }   
+    }
+
+
+
+    /*
+    if (hayMatch()){
+        combo++
+        mostrarCombo()
+        setTimeout(() => buscarMatches(), 1000) 
+    }
+    else {
+        combo = 1
+        mostrarCombo()
+    }*/
+
 }
-*/
+
 const buscarYborrarMatches = () => {
     //console.log("estas en buscar y borrar matches")
  
