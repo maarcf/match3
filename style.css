@@ -144,6 +144,8 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
+    top: 0;
+    bottom: 0;
     z-index: 4;
 }
 
@@ -211,7 +213,7 @@ transform: rotate(180deg);
         width: 300px;
     }
     
-    .controles{
+    .controles {
         width: 290px;
         font-size: 15px;
     }
