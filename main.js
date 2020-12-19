@@ -272,7 +272,7 @@ const reacomodarFrutas = () => {
     if (hayMatch()){
         combo++
         mostrarCombo()
-        setTimeout(() => buscarMatches(), 1000) 
+        setTimeout(() => buscarMatches(), 700) 
     }
     else {
         combo = 1
